@@ -1,0 +1,83 @@
+/* General Styling */
+.dashboard {
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Header */
+  .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    z-index: 1000;
+  }
+  
+  /* Search Bar */
+  .search-bar {
+    margin-top: 120px; /* To avoid overlap with the fixed header */
+    padding: 10px;
+  }
+  
+  .search-bar input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Categories */
+  .categories {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+  }
+  
+  .category-btn {
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+    margin-right: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+  }
+  
+  .category-btn:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  /* Menu Items */
+  .menu {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .menu-item span {
+    font-weight: bold;
+  }
+  
+  .menu-item button {
+    padding: 5px;
+  }
+  
+  /* Footer */
+  .footer {
+    position: fixed;
+    bottom: 0;
+    width: calc(100% -20px);
+    background-color:#007bff ;
+    color:white;
+    text-align:center;
+    padding:10px;
+    border-radius:5px;
+}
+  
