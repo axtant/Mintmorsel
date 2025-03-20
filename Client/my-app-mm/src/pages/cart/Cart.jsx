@@ -1,9 +1,12 @@
+import Header from "../../components/Header";
 import "./cart.css";
 
 const Cart = (  ) => {
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold text-center mb-6">Shopping Cart</h1>
+        <div className="container p-4  mt-13">
+        <div>
+             <Header title="Shopping Cart" showBackButton={true} />
+        </div>
             
             {/* Added Items Section */}
             <div className="bg-white shadow-md rounded-lg p-4 mb-">

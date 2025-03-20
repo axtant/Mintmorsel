@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './Dashboard.css';
+import Header from '../../components/Header';
 
 const Dashboard = () => {
   const [cartItems, setCartItems] = useState({});
@@ -50,11 +51,10 @@ const Dashboard = () => {
   });
 
   return (
-    <div className="dashboard p-4 bg-gray-100">
+    <div className="dashboard p-4 mt-13 bg-gray-100">
       {/* Fixed Header */}
-      <header className="header">
-        <h1 className="text-3xl font-bold text-center mb-6">BLa Bla Menu</h1>
-      </header>
+
+      <Header title="BLa Bla Menu" showBackButton={false} />
 
       {/* Search Bar */}
       <div className="search ml-4">
@@ -119,21 +119,21 @@ const Dashboard = () => {
 
       {/* Sticky Footer */}
       {Object.keys(cartItems).length > 0 && (
-  <footer className="footer fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 flex justify-between items-center">
-    <p>
-      {Object.values(cartItems).reduce((totalItems, quantity) => totalItems + quantity, 0)} items - ₹
-      {menuItems.reduce((totalPrice, item) => {
-        const itemQuantity = cartItems[item.id] || 0; // Get quantity for the item from cartItems
-        return totalPrice + (item.price * itemQuantity); // Calculate total price for each item
-      }, 0).toFixed(2)} {/* Format to two decimal places */}
-    </p>
-    <Link
-      to="/cart"
-      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-    >
-      View Cart
-    </Link>
-  </footer>
+        <footer className="footer fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 flex justify-between items-center">
+        <p>
+          {Object.values(cartItems).reduce((totalItems, quantity) => totalItems + quantity, 0)} items - ₹
+          {menuItems.reduce((totalPrice, item) => {
+            const itemQuantity = cartItems[item.id] || 0; 
+            return totalPrice + (item.price * itemQuantity);
+          }, 0).toFixed(2)} {}
+        </p>
+        <Link
+          to="/cart"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 "
+        >
+          View Cart
+        </Link>
+      </footer>
 )}
 
     </div>
