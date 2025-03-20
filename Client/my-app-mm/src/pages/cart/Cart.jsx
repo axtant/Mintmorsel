@@ -1,18 +1,27 @@
 import "./cart.css";
 
-const Cart = ({ cartItems = [] }) => {
+const Cart = (  ) => {
     return (
         <div className="container mx-auto p-4">
             <h1 className="text-3xl font-bold text-center mb-6">Shopping Cart</h1>
             
             {/* Added Items Section */}
-            <div className="bg-white shadow-md rounded-lg p-4 mb-6">
+            <div className="bg-white shadow-md rounded-lg p-4 mb-">
                 <h2 className="text-xl font-semibold mb-2">Added Items</h2>
                 <ul className="list-disc pl-5">
                     <li>Item 1 - $10.00</li>
                     <li>Item 2 - $15.00</li>
                     <li>Item 3 - $20.00</li>
                 </ul>
+            </div>
+
+            {/* Special Note Box */}
+            <div>
+                <textarea id ="specialNote" 
+                rows="1"
+                colcols="40" 
+                className="specialNote bg-red text-black-700 border border-black-300 rounded-md p-2 mb-4"  
+                placeholder="add note to chef"></textarea>
             </div>
 
             {/* Instruction Box */}
