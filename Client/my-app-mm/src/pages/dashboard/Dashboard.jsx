@@ -21,7 +21,7 @@ const Dashboard = () => {
     <div className="dashboard">
       {/* Fixed Header */}
       <header className="header">
-        <h1>Local Food Startup</h1>
+        <h1>img</h1>
       </header>
 
       {/* Search Bar */}

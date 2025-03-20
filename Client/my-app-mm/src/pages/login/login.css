@@ -6,19 +6,9 @@ body {
     padding: 0;
   }
   
-  .login-page {
-    max-width: 400px;
-    margin: auto;
-    margin-top: 50px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    padding: 30px;
-  }
-  
   .login-page h1 {
-    text-align: center;
-    font-size: 24px;
+    text-align: Left;
+    font-size: 32px;
     margin-bottom: 20px;
   }
   

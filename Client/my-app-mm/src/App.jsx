@@ -6,6 +6,8 @@ import Signup from './pages/signup/Signup';
 import Dashboard from './pages/dashboard/Dashboard';
 
 function App() {
+
+  
   return (
     <Router>
       <Routes>
