@@ -1,4 +1,6 @@
 /* General Styling */
+@import "tailwindcss";
+
 .dashboard {
     font-family: Arial, sans-serif;
   }
