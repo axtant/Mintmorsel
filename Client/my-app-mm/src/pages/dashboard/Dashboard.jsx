@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './Dashboard.css';
 import Header from '../../components/Header';
+import { MenuContext } from '../../context/MenuContext'; // Import MenuContext
 
 const Dashboard = () => {
+  const { menuItems, storeOpen } = useContext(MenuContext); // Access menu items and store status
   const [cartItems, setCartItems] = useState({});
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const categories = ['All', 'Veg', 'Non-veg', 'Egg', 'Add ons'];
-  const menuItems = [
-    { id: 1, category: 'Veg', name: 'Veg Thali', price: 50 },
-    { id: 2, category: 'Non-veg', name: 'Non-veg Thali', price: 100 },
-    { id: 3, category: 'Egg', name: 'Egg Thali', price: 70 },
-    { id: 4, category: 'Add ons', name: 'Fish fry ', price: 200 },
-  ];
 
   // Increment item quantity
   const handleAddToCart = (item) => {
@@ -43,6 +39,10 @@ const Dashboard = () => {
     });
   };
 
+  if (!storeOpen) {
+    return <div className="text-center bg-red-500 text-white p-4">The store is closed. Please come back later.</div>;
+  }
+
   // Filter menu items based on search term and selected category
   const filteredMenuItems = menuItems.filter(item => {
     const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -53,7 +53,6 @@ const Dashboard = () => {
   return (
     <div className="dashboard p-4 mt-13 bg-gray-100">
       {/* Fixed Header */}
-
       <Header title="BLa Bla Menu" showBackButton={false} />
 
       {/* Search Bar */}
@@ -120,22 +119,21 @@ const Dashboard = () => {
       {/* Sticky Footer */}
       {Object.keys(cartItems).length > 0 && (
         <footer className="footer fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 flex justify-between items-center">
-        <p>
-          {Object.values(cartItems).reduce((totalItems, quantity) => totalItems + quantity, 0)} items - ₹
-          {menuItems.reduce((totalPrice, item) => {
-            const itemQuantity = cartItems[item.id] || 0; 
-            return totalPrice + (item.price * itemQuantity);
-          }, 0).toFixed(2)} {}
-        </p>
-        <Link
-          to="/cart"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 "
-        >
-          View Cart
-        </Link>
-      </footer>
-)}
-
+          <p>
+            {Object.values(cartItems).reduce((totalItems, quantity) => totalItems + quantity, 0)} items - ₹
+            {menuItems.reduce((totalPrice, item) => {
+              const itemQuantity = cartItems[item.id] || 0; 
+              return totalPrice + (item.price * itemQuantity);
+            }, 0).toFixed(2)} {}
+          </p>
+          <Link
+            to="/cart"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 "
+          >
+            View Cart
+          </Link>
+        </footer>
+      )}
     </div>
   );
 };

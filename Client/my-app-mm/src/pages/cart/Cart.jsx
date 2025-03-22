@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import "./cart.css";
 
 const Cart = (  ) => {
+
+    
     return (
         <div className="container p-4  mt-13">
         <div>
@@ -49,6 +52,15 @@ const Cart = (  ) => {
                     <span>$47.25</span>
                 </div>
             </div>
+
+            {/* Checkout Button */}
+            <div>
+      {/* Render cart items and total amount */}
+        </div>
+            <Link to={{ pathname: '/confirm-payments', state: { totalAmount: "orderTotal" } }}>
+              Proceed to Payment
+            </Link>
+
         </div>
     );
 }
