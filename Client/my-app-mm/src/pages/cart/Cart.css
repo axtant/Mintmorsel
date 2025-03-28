@@ -7,4 +7,15 @@
    width: 100%;
    
 }
+.proceed-button {
+   display: inline-block;
+   text-align: center;
+   font-size: 1rem;
+   font-weight: bold;
+   transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
+.proceed-button:hover {
+   background-color: #2563eb; /* Darker blue */
+   transform: scale(1.05); /* Slightly enlarge the button on hover */
+}

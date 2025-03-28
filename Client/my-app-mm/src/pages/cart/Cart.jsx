@@ -2,17 +2,13 @@ import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import "./cart.css";
 
-const Cart = (  ) => {
-
-    
+const Cart = () => {
     return (
-        <div className="container p-4  mt-13">
-        <div>
-             <Header title="Shopping Cart" showBackButton={true} />
-        </div>
-            
+        <div className="container p-4 mt-13">
+            <Header title="Shopping Cart" showBackButton={true} />
+
             {/* Added Items Section */}
-            <div className="bg-white shadow-md rounded-lg p-4 mb-">
+            <div className="bg-white shadow-md rounded-lg p-4 mb-4">
                 <h2 className="text-xl font-semibold mb-2">Added Items</h2>
                 <ul className="list-disc pl-5">
                     <li>Item 1 - $10.00</li>
@@ -23,11 +19,13 @@ const Cart = (  ) => {
 
             {/* Special Note Box */}
             <div>
-                <textarea id ="specialNote" 
-                rows="1"
-                colcols="40" 
-                className="specialNote bg-red text-black-700 border border-black-300 rounded-md p-2 mb-4"  
-                placeholder="add note to chef"></textarea>
+                <textarea
+                    id="specialNote"
+                    rows="1"
+                    cols="40"
+                    className="specialNote bg-red text-black-700 border border-black-300 rounded-md p-2 mb-4"
+                    placeholder="Add note to chef"
+                ></textarea>
             </div>
 
             {/* Instruction Box */}
@@ -54,15 +52,16 @@ const Cart = (  ) => {
             </div>
 
             {/* Checkout Button */}
-            <div>
-      {/* Render cart items and total amount */}
-        </div>
-            <Link to={{ pathname: '/confirm-payments', state: { totalAmount: "orderTotal" } }}>
-              Proceed to Payment
-            </Link>
-
+            <div className="text-center mt-6">
+                <Link
+                    to="/confirm-payments"
+                    className="proceed-button bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-200"
+                >
+                    Proceed to Payment
+                </Link>
+            </div>
         </div>
     );
-}
+};
 
 export default Cart;

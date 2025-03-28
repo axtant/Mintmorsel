@@ -8,7 +8,7 @@ const Header = ({ title, showBackButton }) => {
     <header className="header flex items-center 
     justify-between p-2 
     fixed top-0 left-0 right-0  
-    shadow z-10 bg-yellow-100 ">
+    shadow z-10 bg-blue-100 ">
       {showBackButton && (
         <button 
           onClick={() => navigate(-1)} // Navigate to the previous page

@@ -10,7 +10,16 @@ const Dashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
+
   const categories = ['All', 'Veg', 'Non-veg', 'Egg', 'Add ons'];
+  // const menuItems = [
+  //   { id: 1, category: 'Veg', name: 'Veg Thali', price: 50 },
+  //   { id: 2, category: 'Non-veg', name: 'Non-veg Thali', price: 100 },
+  //   { id: 3, category: 'Egg', name: 'Egg Thali', price: 70 },
+  //   { id: 4, category: 'Add ons', name: 'Fish fry ', price: 200 },
+  // ];
+
+  // const categories = ['All', 'Veg', 'Non-veg', 'Egg', 'Add ons'];
 
   // Increment item quantity
   const handleAddToCart = (item) => {
@@ -53,7 +62,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard p-4 mt-13 bg-gray-100">
       {/* Fixed Header */}
-      <Header title="BLa Bla Menu" showBackButton={false} />
+      <Header title="Mintmorsel" showBackButton={false} />
 
       {/* Search Bar */}
       <div className="search ml-4">
