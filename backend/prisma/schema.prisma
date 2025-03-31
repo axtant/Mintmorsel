@@ -21,3 +21,11 @@ model User {
   pin      Int 
   gMapLink String
 }
+
+model Menu {
+  id       String  @id @default(uuid())
+  category String
+  itemName String
+  itemDesc String
+  price    Float
+}
