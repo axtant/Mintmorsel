@@ -6,11 +6,15 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Cart from './pages/cart/Cart';
 import ConfirmPayments from './pages/confirmPayments/Confirm';
 import AdminDashboard from './components/AdminDashboard';
+import { CartProvider } from './context/CartContext';
+
 
 function App() {
 
   
   return (
+
+    <CartProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
@@ -21,6 +25,7 @@ function App() {
         <Route path='/admin-dashboard' element={<AdminDashboard />} />
       </Routes>
     </Router>
+    </CartProvider>
     
   );
 }
