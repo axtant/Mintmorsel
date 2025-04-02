@@ -7,14 +7,8 @@ const authRouter = new Hono<{
     DATABASE_URL:string,
   }
 }>();
-
-// const menuRouter = new Hono<{
-//   Bindings: {
-//     DATABASE_URL:string,
-//   }
-// }>();
-
 authRouter.post('/signup', async (c) => {
+
   const prisma = createPrismaClient(c.env.DATABASE_URL);
 
   const body = await c.req.json();

@@ -1,7 +1,5 @@
 import { Hono } from 'hono';
-import { authMiddleware } from '../middleware/auth';
 import { createPrismaClient } from '../config/prisma';
-import { B } from '@angular/cdk/keycodes';
 import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
 
@@ -29,16 +27,30 @@ menuRouter.post('/', async (c) => {
   }
 });
 
-menuRouter.get('/',  async (c) => {
+menuRouter.get('/', async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
+
   try {
-    const menu = await prisma.menu.findMany();
+    const category = c.req.query('category'); // Get category from query params
+    const whereCondition = category && category !== 'All' ? { category } : {}; // Apply filter
+
+    const menu = await prisma.menu.findMany({
+      where: whereCondition,
+      select: {
+        category: true,
+        itemName: true,
+        itemDesc: true,
+        price: true,
+      },
+    });
+
     return c.json(menu);
   } catch (e) {
     return c.json({ message: e }, 400);
   }
 });
+
 
 export default menuRouter;
