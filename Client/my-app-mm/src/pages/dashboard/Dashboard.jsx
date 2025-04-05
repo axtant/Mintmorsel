@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import "./Dashboard.css";
 import Header from "../../components/Header";
 import { fetchMenu } from "../../services/menuService";
-import { useCart } from "../../hooks/useCart";
-import { CartFooter } from "../../components/CartFooter";
+import { useCart } from "../../context/CartContext";
 
 const CATEGORIES = ["All", "Veg", "Non Veg", "Egg", "Add ons"];
 
@@ -12,7 +11,8 @@ const Dashboard = () => {
     const [menuItems, setMenuItems] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
-    const { cartItems, setCartItems, addToCart, removeFromCart } = useCart(); // ✅ Added setCartItems
+
+    const { cartItems, addToCart, removeFromCart } = useCart();
 
     useEffect(() => {
         const loadMenu = async () => {
@@ -22,21 +22,10 @@ const Dashboard = () => {
         loadMenu();
     }, []);
 
-    useEffect(() => {
-        const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-        setCartItems(savedCart);
-    }, []);
-
-    const handleAddToCart = (item) => {
-        const updatedCart = JSON.parse(localStorage.getItem('cart')) || {};
-        updatedCart[item.itemName] = (updatedCart[item.itemName] || 0) + 1;
-        localStorage.setItem('cart', JSON.stringify(updatedCart));
-        setCartItems({ ...updatedCart });
-    };
-
     const filteredMenuItems = menuItems.filter((item) => {
         const matchesSearch = item.itemName.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
+        const matchesCategory =
+            selectedCategory === "All" || item.category === selectedCategory;
         return matchesSearch && matchesCategory;
     });
 
@@ -73,7 +62,9 @@ const Dashboard = () => {
             {/* Menu Items */}
             <div className="menu mt-2">
                 {filteredMenuItems.map((item) => {
-                    const cartItem = cartItems.find((cartItem) => cartItem.itemName === item.itemName);
+                    const cartItem = Array.isArray(cartItems)
+                        ? cartItems.find((ci) => ci.itemName === item.itemName)
+                        : null;
                     return (
                         <div key={item.itemName} className="menu-item flex justify-between items-center border-b py-2">
                             <div>
@@ -82,16 +73,25 @@ const Dashboard = () => {
                             </div>
                             {cartItem ? (
                                 <div className="flex items-center">
-                                    <button onClick={() => removeFromCart(item)} className="bg-red-500 text-white px-2 py-1 rounded">
+                                    <button 
+                                        onClick={() => removeFromCart(item.itemName)} 
+                                        className="bg-red-500 text-white px-2 py-1 rounded"
+                                    >
                                         -
                                     </button>
                                     <span className="mx-2">{cartItem.quantity}</span>
-                                    <button onClick={() => addToCart(item)} className="bg-green-500 text-white px-2 py-1 rounded">
+                                    <button 
+                                        onClick={() => addToCart(item)} 
+                                        className="bg-green-500 text-white px-2 py-1 rounded"
+                                    >
                                         +
                                     </button>
                                 </div>
                             ) : (
-                                <button onClick={() => addToCart(item)} className="bg-green-500 text-white px-4 py-1 rounded">
+                                <button 
+                                    onClick={() => addToCart(item)} 
+                                    className="bg-green-500 text-white px-4 py-1 rounded"
+                                >
                                     Add
                                 </button>
                             )}
@@ -100,9 +100,19 @@ const Dashboard = () => {
                 })}
             </div>
 
-            {/* Footer Cart Summary */}
-            {Object.keys(cartItems).length > 0 && (
-                <CartFooter cartItems={cartItems} menuItems={menuItems} onChange={handleAddToCart} />
+            {/* Footer */}
+            
+            {Array.isArray(cartItems) && cartItems.length > 0 && (
+                <footer className="cart-footer fixed bottom-0 left-0 w-full bg-white shadow-md p-4 flex justify-between items-center">
+                    <p>Total Items: {cartItems.length}</p>
+                    <Link 
+                        to="/cart" 
+                        state={{ cartItems }}
+                        className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
+                    >
+                        View Cart
+                    </Link>
+                </footer>
             )}
         </div>
     );

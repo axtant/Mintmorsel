@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const CartFooter = ({ cartItems, menuItems }) => {
+const CartFooter = ({ cartItems, menuItems }) => {
     return (
         <footer className="footer fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 flex justify-between items-center">
             <p>
@@ -17,3 +17,4 @@ export const CartFooter = ({ cartItems, menuItems }) => {
     );
 };
 
+export default CartFooter;

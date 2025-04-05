@@ -1,30 +1,52 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
-// ✅ Create Context
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState({});
+    const [cartItems, setCartItems] = useState([]);
 
-    // ✅ Add item to cart
+    useEffect(() => {
+        const savedCart = localStorage.getItem('cart');
+        try {
+            const parsedCart = JSON.parse(savedCart);
+            setCartItems(Array.isArray(parsedCart) ? parsedCart : []);
+        } catch (error) {
+            console.error('Error parsing cart data:', error);
+            setCartItems([]);
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+    }, [cartItems]);
+
     const addToCart = (item) => {
-        setCartItems((prev) => ({
-            ...prev,
-            [item.itemName]: (prev[item.itemName] || 0) + 1,
-        }));
+        setCartItems((prev) => {
+            const existingItem = prev.find((ci) => ci.itemName === item.itemName);
+            if (existingItem) {
+                return prev.map((ci) =>
+                    ci.itemName === item.itemName
+                        ? { ...ci, quantity: ci.quantity + 1 }
+                        : ci
+                );
+            }
+            return [...prev, { ...item, quantity: 1 }];
+        });
     };
 
-    // ✅ Remove item from cart
-    const removeFromCart = (item) => {
-        setCartItems((prev) => {
-            const updatedCart = { ...prev };
-            if (updatedCart[item.itemName] > 1) {
-                updatedCart[item.itemName] -= 1;
-            } else {
-                delete updatedCart[item.itemName];
-            }
-            return updatedCart;
-        });
+    const removeFromCart = (itemName) => {
+        setCartItems((prev) =>
+            prev.reduce((acc, ci) => {
+                if (ci.itemName === itemName) {
+                    if (ci.quantity > 1) {
+                        acc.push({ ...ci, quantity: ci.quantity - 1 });
+                    }
+                } else {
+                    acc.push(ci);
+                }
+                return acc;
+            }, [])
+        );
     };
 
     return (
@@ -34,7 +56,10 @@ export const CartProvider = ({ children }) => {
     );
 };
 
-// ✅ Custom Hook
 export const useCart = () => {
-    return useContext(CartContext);
+    const context = useContext(CartContext);
+    if (!context) {
+        throw new Error("useCart must be used within a CartProvider");
+    }
+    return context;
 };

@@ -10,12 +10,15 @@
     "@prisma/extension-accelerate": "^1.3.0",
     "@types/ws": "^8.18.1",
     "backend": "file:",
+    "bcryptjs": "^3.0.2",
     "hono": "^4.7.5",
     "typescript": "^5.8.2",
     "ws": "^8.18.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250214.0",
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^22.14.0",
     "prisma": "^6.5.0",
     "wrangler": "^4.4.0"
   },

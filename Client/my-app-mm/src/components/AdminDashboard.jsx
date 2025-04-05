@@ -1,84 +1,61 @@
-// src/components/AdminDashboard.jsx
-import React, { useContext, useState } from 'react';
-import { MenuContext } from '../context/MenuContext'; // Import your MenuContext
+import React, { useEffect, useState } from 'react';
 
 const AdminDashboard = () => {
-  const { setMenuItems } = useContext(MenuContext); // Access setMenuItems from context
-  const [category, setCategory] = useState(''); // State for category
-  const [name, setName] = useState(''); // State for item name
-  const [price, setPrice] = useState(''); // State for price
-  const [storeOpen, setStoreOpen] = useState(true); // State for store status
+  const [orders, setOrders] = useState([]);
 
-  const handleSubmit = () => {
-    if (!category || !name || !price) {
-      alert("Please fill in all fields."); // Simple validation
-      return;
-    }
+  useEffect(() => {
+    const ws = new WebSocket('ws://localhost:8081');
 
-    // Convert price to a number
-    const priceValue = parseFloat(price);
-    if (isNaN(priceValue) || priceValue <= 0) {
-      alert("Please enter a valid price."); // Validate price
-      return;
-    }
+    ws.onopen = () => {
+      console.log('WebSocket connection established');
+    };
 
-    // Update menu items in context
-    setMenuItems((prevItems) => [
-      ...prevItems,
-      { category, name, price: priceValue },
-    ]);
+    ws.onmessage = (event) => {
+        const receivedData = JSON.parse(event.data);
+        if (receivedData.type === 'order_received') {
+            setOrders((prevOrders) => [...prevOrders, receivedData]);
+            console.log('Order received:', receivedData);
+        }
+    };
     
-    // Clear inputs after submission
-    setCategory('');
-    setName('');
-    setPrice('');
-  };
+
+    ws.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+
+    return () => ws.close();
+  }, []);
+
+  useEffect(() => {
+    console.log('Orders updated:', orders);
+  }, [orders]);
+
+//   const handleConfirm = (orderId) => {
+//     ws.send(JSON.stringify({ type: 'order_confirmed', orderId }));
+//     console.log(`Order ${orderId} confirmed`);
+//   };
+
+//   const handleDecline = (orderId) => {
+//     ws.send(JSON.stringify({ type: 'order_declined', orderId }));
+//     console.log(`Order ${orderId} declined`);
+//   };
+
 
   return (
-    <div className="admin-dashboard p-4 bg-gray-100">
-      <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
-
-      {/* Input section for adding menu items */}
-      <div className="mb-4">
-        <input
-          type="text"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          placeholder="Category (e.g., Veg)"
-          className="border rounded p-2 w-full mb-2"
-        />
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Item Name (e.g., Veg Thali)"
-          className="border rounded p-2 w-full mb-2"
-        />
-        <input
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          placeholder="Price (e.g., 75)"
-          className="border rounded p-2 w-full mb-4"
-        />
-        <button 
-          onClick={handleSubmit} 
-          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-        >
-          Add Item
-        </button>
-      </div>
-
-      {/* Store open/close toggle */}
-      <div className="mt-4">
-        <label>
-          <input 
-            type="checkbox" 
-            checked={storeOpen} 
-            onChange={() => setStoreOpen(!storeOpen)} 
-          />
-          Store is {storeOpen ? 'Open' : 'Closed'}
-        </label>
+    <div className="admin-dashboard">
+      <h1>Admin Dashboard</h1>
+      <div className="orders">
+        {orders.length === 0 ? (
+          <p>No orders received yet</p>
+        ) : (
+            orders.map((order, index) => (
+                <div key={index}>
+                    <h2>Order #{index + 1}</h2>
+                    <p>Items: {order.items.join(', ')}</p>
+                    <p>Amount: ₹{order.amount}</p>
+                </div>
+            ))
+        )}
       </div>
     </div>
   );
