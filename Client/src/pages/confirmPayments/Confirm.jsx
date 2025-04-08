@@ -1,45 +1,35 @@
+// Confirm.jsx
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 
 const Confirm = () => {
   const [totalAmount, setTotalAmount] = useState(0);
+  const navigate = useNavigate();
 
-  // Fetch total amount from localStorage
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
     const calculatedTotal = storedCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
     setTotalAmount(calculatedTotal);
   }, []);
 
-  // Open WebSocket connection and send order data
-  const handleCashOnDelivery = () => {
-    const ws = new WebSocket('ws://localhost:8081'); // Replace with your WebSocket server URL
-
-    ws.onopen = () => {
-      const orderData = JSON.parse(localStorage.getItem('cart')) || [];
-      ws.send(JSON.stringify({ type: 'order', data: orderData }));
-  };  
-
-    ws.onmessage = (event) => {
-      console.log('Message from server:', event.data);
-    };
-
-    ws.onclose = () => {
-      console.log('WebSocket connection closed');
-    };
-
-    ws.onerror = (error) => {
-      console.error('WebSocket error:', error);
-    };
+  const handlePaymentMethod = (method) => {
+    navigate('/order-confirmation', {
+      state: {
+        paymentMethod: method,
+        cartItems: JSON.parse(localStorage.getItem('cart')) || [],
+        totalAmount
+      }
+    });
   };
 
   return (
     <div className="confirm-payments">
-      <Header title="Confirmation" showBackButton={true} />
-
+      <Header title="Payment Method" showBackButton={true} />
+      
       <div className="grid gap-6 justify-center my-6 mt-20">
         <button
-          onClick={handleCashOnDelivery}
+          onClick={() => handlePaymentMethod('COD')}
           className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
         >
           Cash on Delivery
@@ -49,6 +39,7 @@ const Confirm = () => {
           onClick={() => {
             const upiPaymentUrl = `tez://upi/pay?pa=merchant@upi&am=${totalAmount}&tn=FoodOrder&cu=INR`;
             window.open(upiPaymentUrl, '_blank');
+            handlePaymentMethod('GPay');
           }}
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
         >

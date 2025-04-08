@@ -35,7 +35,7 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard p-4 mt-13 bg-gray-100 pb-16">
-            <Header title="Mintmorsel" showBackButton={false} />
+            <Header title="Mintmorsel" showBackButton={false} showLogOutButton={false} />
 
             {/* Search Bar */}
             <div className="search ml-4">

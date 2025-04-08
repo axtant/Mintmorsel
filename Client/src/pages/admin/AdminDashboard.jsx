@@ -40,17 +40,17 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleDeleteAll = async () => {
-    if (!window.confirm('Are you sure you want to delete all menu items?')) return;
+  // const handleDeleteAll = async () => {
+  //   if (!window.confirm('Are you sure you want to delete all menu items?')) return;
 
-    try {
-      await deleteAllMenuItems();
-      alert('All menu items deleted!');
-    } catch (error) {
-      console.error('Error deleting menu items:', error);
-      alert('Failed to delete menu items.');
-    }
-  };
+  //   try {
+  //     await deleteAllMenuItems();
+  //     alert('All menu items deleted!');
+  //   } catch (error) {
+  //     console.error('Error deleting menu items:', error);
+  //     alert('Failed to delete menu items.');
+  //   }
+  // };
   return (
     <div className="admin-dashboard p-6 bg-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
@@ -107,7 +107,7 @@ const AdminDashboard = () => {
         </div>
         <div>
           <button
-            onClick={handleDeleteAll}
+            // onClick={handleDeleteAll}
             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
           >
             Delete All Menu Items
@@ -116,7 +116,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Order Dashboard */}
-      {/* Import and render your OrderDashboard component here */}
+      { <OrderDashboard /> }
     </div>
   );
 };

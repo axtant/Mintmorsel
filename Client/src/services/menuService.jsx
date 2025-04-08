@@ -2,7 +2,7 @@ import { API_ENDPOINTS } from '../config/apiConfig';
 
 export const fetchMenu = async () => {
   try {
-    const response = await fetch('http://127.0.0.1:8787/api/v1/menu', {
+    const response = await fetch(API_ENDPOINTS.MENU, {
       method: 'GET',
       credentials: 'include', // Include cookies in requests
     });

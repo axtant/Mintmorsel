@@ -48,8 +48,6 @@ authRouter.post('/signup', async (c) => {
 authRouter.post('/signin', async (c) => {
   const body = await c.req.json();
   const prisma = createPrismaClient(c.env.DATABASE_URL);
-  
-
   // Find user by username
   const user = await prisma.user.findUnique({
     where: {

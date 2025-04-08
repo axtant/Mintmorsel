@@ -7,6 +7,8 @@ import Cart from './pages/cart/Cart';
 import ConfirmPayments from './pages/confirmPayments/Confirm';
 import { CartProvider } from './context/CartContext';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import OrderConfirmation from './pages/confirmPayments/ConfirmOrder';
+import OrderDashboard from './pages/admin/OrderDashboard';
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/confirm-payments" element={<ConfirmPayments />} />
         <Route path='/admin-dashboard' element={<AdminDashboard />} />
+        <Route path= '/order-confirmation' element={<OrderConfirmation />} />
+        <Route path='/order-dashboard' element={<OrderDashboard />} />
       </Routes>
     </Router>
     </CartProvider>
