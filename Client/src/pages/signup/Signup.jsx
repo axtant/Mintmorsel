@@ -1,24 +1,41 @@
+// src/components/Signup.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Signup.css';
+import { signup } from '../../services/authService';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [addressLine1, setAddressLine1] = useState('');
+  const [password, setPassword] = useState('');
   const [pin, setPin] = useState('');
   const [gmapLink, setGmapLink] = useState('');
+  const [address, setAddress] = useState('');
+  const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Signup data:', {
-      username,
-      phoneNumber,
-      addressLine1,
-      pin,
-      gmapLink,
-    });
-    // Implement backend logic to save user data
+    if (!username || !password || !pin || !gmapLink || !address) {
+      alert('Please fill all required fields');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      await signup({
+        username,
+        password,
+        pin: parseInt(pin),
+        gMapLink: gmapLink,
+        address,
+      });
+      alert('Signup successful!');
+      // Redirect to login page after successful signup
+      window.location.href = '/login';
+    } catch (error) {
+      setError('Failed to create account');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -35,27 +52,18 @@ const Signup = () => {
           />
         </div>
         <div className="form-group">
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
           <label>Phone Number:</label>
           <input
             type="tel"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Address Line 1:</label>
-          <input
-            type="text"
-            value={addressLine1}
-            onChange={(e) => setAddressLine1(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Pin Code:</label>
-          <input
-            type="number"
             value={pin}
             onChange={(e) => setPin(e.target.value)}
             required
@@ -70,10 +78,22 @@ const Signup = () => {
             required
           />
         </div>
-        <button type="submit">Signup</button>
+        <div className="form-group">
+          <label>Address:</label>
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Signing up...' : 'Signup'}
+        </button>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </form>
       <p>
-        Already registered? <Link to="/">Login</Link>
+        Already registered? <Link to="/login">Login</Link>
       </p>
     </div>
   );

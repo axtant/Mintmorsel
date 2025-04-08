@@ -13,7 +13,7 @@ const menuRouter = new Hono<{
   };
 }>();
 
-menuRouter.post('/',  async (c) => {
+menuRouter.post('/post',  async (c) => {
   const prisma = createPrismaClient(c.env.DATABASE_URL);
   const body = await c.req.json();
   try {
@@ -56,6 +56,16 @@ menuRouter.get('/', authMiddleware, async (c) => {
     return c.json({ message: e }, 400);
   }
 });
+
+menuRouter.delete('/delete', async (c) => {
+  const prisma = createPrismaClient(c.env.DATABASE_URL);
+  try {
+    await prisma.menu.deleteMany();
+    return c.json({ message: 'All menu items deleted successfully' }, 200);
+  } catch (e) {
+    return c.json({ message: e }, 400);
+  }
+})
 
 
 export default menuRouter;

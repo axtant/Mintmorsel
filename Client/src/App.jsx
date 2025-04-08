@@ -5,8 +5,8 @@ import Signup from './pages/signup/Signup';
 import Dashboard from './pages/dashboard/Dashboard';
 import Cart from './pages/cart/Cart';
 import ConfirmPayments from './pages/confirmPayments/Confirm';
-import AdminDashboard from './components/AdminDashboard';
 import { CartProvider } from './context/CartContext';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 
 function App() {
@@ -17,7 +17,8 @@ function App() {
     <CartProvider>
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+      <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/cart" element={<Cart />} />

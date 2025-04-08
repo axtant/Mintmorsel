@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import { fetchMenu } from "../../services/menuService";
 import { useCart } from "../../context/CartContext";
 
-const CATEGORIES = ["All", "Veg", "Non Veg", "Egg", "Add ons"];
+const CATEGORIES = ["All", "Veg", "Chicken", "Egg", "Add ons"];
 
 const Dashboard = () => {
     const [menuItems, setMenuItems] = useState([]);
@@ -16,8 +16,12 @@ const Dashboard = () => {
 
     useEffect(() => {
         const loadMenu = async () => {
-            const data = await fetchMenu();
-            setMenuItems(data);
+            try {
+                const data = await fetchMenu();
+                setMenuItems(data);
+            } catch (error) {
+                console.error('Error fetching menu:', error);
+            }
         };
         loadMenu();
     }, []);
@@ -61,12 +65,12 @@ const Dashboard = () => {
 
             {/* Menu Items */}
             <div className="menu mt-2">
-                {filteredMenuItems.map((item) => {
+                {filteredMenuItems.map((item) =>  {
                     const cartItem = Array.isArray(cartItems)
                         ? cartItems.find((ci) => ci.itemName === item.itemName)
                         : null;
                     return (
-                        <div key={item.itemName} className="menu-item flex justify-between items-center border-b py-2">
+                        <div key={item.id} className="menu-item flex justify-between items-center border-b py-2">
                             <div>
                                 <p className="font-semibold">{item.itemName} - ₹{item.price}</p>
                                 <p className="text-gray-500 text-sm">{item.itemDesc}</p>
