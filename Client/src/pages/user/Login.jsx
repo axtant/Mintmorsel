@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { login } from '../../services/authService';
-import '../css/login.css';
 import '../css/main.css';
 
 const Login = () => {

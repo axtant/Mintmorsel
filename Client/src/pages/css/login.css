@@ -1,11 +1,4 @@
-General Styling
-body {
-    font-family: Arial, sans-serif;
-    background-color: #100909;
-    margin: 0;
-    padding: 0;
-  }
-  
+
   .login-page h1 {
     text-align: Left;
     font-size: 32px;
@@ -18,26 +11,25 @@ body {
     color: #666;
   }
   
-  /* Facebook Button */
+
   .facebook-btn {
-    background-color: #4267b2; /* Facebook blue */
+    background-color: #4267b2; 
     color: white;
     border: none;
     padding: 12px;
-    border-radius: 50px; /* Rounded button */
+    border-radius: 50px;
     width: calc(100% - 20px);
     margin-bottom: 20px;
   }
   
   .facebook-btn:hover {
-    background-color: #365899; /* Darker Facebook blue */
+    background-color: #365899;
   }
   
   .facebook-btn span {
     font-size: 16px;
   }
-  
-  /* Divider Styling */
+
   .divider {
     text-align: center;
   }
@@ -45,8 +37,7 @@ body {
   .divider span {
     color: #666666;
   }
-  
-  /* Form Styling */
+
   form {
     display: flex;
     flex-direction: column;
@@ -66,14 +57,14 @@ body {
   input[type="text"],
   input[type="email"],
   input[type="password"] {
-    width: calc(100% - 20px); /* Adjust for padding */
+    width: calc(100% - 20px); 
   }
   
-  /* Submit Button */
+
   button.submit-btn {
-    background-color: #1db954; /* Spotify green */
+    background-color: #1db954; 
     color: white;
     border: none;
     padding: 12px;
-    border-radius: 50px; /* Rounded button */
+    border-radius: 50px; 
   }

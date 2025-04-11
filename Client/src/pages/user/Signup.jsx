@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signup } from '../../services/authService';
+import '../css/main.css';
 
 const Signup = () => {
   const [username, setUsername] = useState('');

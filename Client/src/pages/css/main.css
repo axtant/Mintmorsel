@@ -5,3 +5,14 @@ body {
     margin: 0;
     padding: 0;
   }
+
+  .login-page h1 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  .dashboard h1 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
