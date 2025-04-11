@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { API_ENDPOINTS } from '../../config/apiConfig';
 import { postMenuItem } from '../../services/menuService';
+import OrderDashboard from './OrderDashboard';
 
 const AdminDashboard = () => {
   // Menu Management States
@@ -116,7 +117,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Order Dashboard */}
-      { <OrderDashboard /> }
+      { <OrderDashboard/> }
     </div>
   );
 };

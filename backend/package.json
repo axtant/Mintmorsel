@@ -22,7 +22,7 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.14.0",
     "prisma": "^6.5.0",
-    "wrangler": "^4.4.0"
+    "wrangler": "^4.10.0"
   },
   "version": "1.0.0",
   "description": "```\r npm install\r npm run dev\r ```",

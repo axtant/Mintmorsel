@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signup } from '../../services/authService';
-import './Signup.css';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -72,7 +71,6 @@ const Signup = () => {
         </div>
         <div className="form-group">
           <label>Google Maps Link:</label>
-          <p>open google maps and copy the link</p>
           <input
             type="text"
             value={gmapLink}

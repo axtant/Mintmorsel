@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './pages/login/login';
-import Signup from './pages/signup/Signup';
-import Dashboard from './pages/dashboard/Dashboard';
-import Cart from './pages/cart/Cart';
-import ConfirmPayments from './pages/confirmPayments/Confirm';
+import Login from './pages/user/Login';
+import Signup from './pages/user/Signup';
+import Dashboard from './pages/user/Dashboard';
+import Cart from './pages/user/Cart';
+import ConfirmPayments from './pages/user/Confirm';
 import { CartProvider } from './context/CartContext';
 import AdminDashboard from './pages/admin/AdminDashboard';
-import OrderConfirmation from './pages/confirmPayments/ConfirmOrder';
+import OrderConfirmation from './pages/user/ConfirmOrder';
 import OrderDashboard from './pages/admin/OrderDashboard';
 
 

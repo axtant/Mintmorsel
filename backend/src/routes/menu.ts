@@ -31,7 +31,7 @@ menuRouter.post('/post',  async (c) => {
   }
 });
 
-menuRouter.get('/', authMiddleware, async (c) => {
+menuRouter.get('/',  async (c) => {
   const userId = c.get('userId');
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
