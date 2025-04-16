@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&family=Bagel+Fat+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+:root{
+  --c1:#90c67c
+}
+
+.signup-page {
+  position: relative;
+  overflow: hidden;
+  height: 222vw;
+  background: url(../css/Signup_Images/Signup_bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.signup-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 222vw;
+  background: rgba(39, 39, 39, 0.6);
+  z-index: 0;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+.food {
+  height: 110vw;
+  width: 110vw;
+  animation: stepRotate 10s ease-in-out infinite;
+}
+.food_div {
+  width: 110vw;
+  height: 115vw;
+  background-color: #5b5b5b;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+}
+.food_img {
+  overflow: hidden;
+  position: absolute;
+  top: -58vw;
+  left: -5vw;
+}
+@keyframes stepRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  45% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  95% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.signup_details {
+  
+  position: relative;
+  top: 60vw;
+  height: 140vw;
+  color: #e1eebc;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+.signup_text {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 10vw;
+}
+.new_username::placeholder,
+.new_password::placeholder,
+.Phone_no::placeholder,
+.Country_code::placeholder,
+.Maps_link::placeholder,
+.Address::placeholder {
+  color: #0d522c;
+}
+.new_username:focus,
+.new_password:focus,
+.Phone_no:focus,
+.Country_code:focus,
+.Maps_link:focus,
+.Address:focus {
+  outline: none;
+  outline: 2px solid black;
+}
+.new_username {
+  background-color: var(--c1);
+  height: 13vw;
+  width: 35vw;
+  border: none;
+  border-radius: 4vw;
+  padding-left: 4vw;
+  font-size: 4vw;
+  font-family: "Alata";
+}
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 95vw;
+}
+.new_password {
+  background-color: var(--c1);
+  height: 13vw;
+  width: 35vw;
+  border: none;
+  border-radius: 4vw;
+  padding-left: 4vw;
+  font-size: 4vw;
+  font-family: "Alata";
+}
+.Country_code {
+  background-color: var(--c1);
+  height: 13vw;
+  width: 10vw;
+  border: none;
+  border-radius: 4vw;
+  padding-left: 4vw;
+  font-size: 4vw;
+  font-family: "Alata";
+}
+.Google_maps {
+  text-decoration: none;
+  background-color: var(--c1);
+  height: 13vw;
+  width: 10vw;
+  border: none;
+  color:#0d522c;
+  display: flex;
+  align-items: center;
+  border-radius: 4vw;
+  padding-left: 4vw;
+  font-size: 6vw;
+  font-family: "Alata";
+}
+.Phone_no {
+  background-color: var(--c1);
+  height: 13vw;
+  width: 60vw;
+  border: none;
+  border-radius: 4vw;
+  padding-left: 4vw;
+  font-size: 4vw;
+  font-family: "Alata";
+}
+.Maps_link {
+  background-color: var(--c1);
+  height: 13vw;
+  width: 60vw;
+  border: none;
+  border-radius: 4vw;
+  padding-left: 4vw;
+  font-size: 4vw;
+  font-family: "Alata";
+}
+.Address {
+  background-color: var(--c1);
+  height: 25vw;
+  width: 80vw;
+  border: none;
+  border-radius: 4vw;
+  padding-left: 4vw;
+  font-size: 4vw;
+  font-family: "Alata";
+}
+.submit_btn{
+  background-color: #e1eebc;
+  height: 13vw;
+  width: 85vw;
+  border: none;
+  border-radius: 4vw;
+  padding-left: 4vw;
+  font-size: 5vw;
+  font-family: "Poppins";
+  color: #0d522c;
+  font-weight: 500;
+}
+.Already_registered{
+  font-family: "Poppins";
+  font-size: 4.5vw;
+}
+.Login_link{
+  text-decoration: none;
+  color: var(--c1);
+}
+.Address-input {
+  width: 100%;           /* Full width of the parent */
+  min-height: 100px;     /* Multi-line appearance */
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  line-height: 1.5;
+  resize: none;          /* Prevent user resizing if not wanted */
+  overflow-wrap: break-word;
+}

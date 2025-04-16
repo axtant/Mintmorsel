@@ -1,22 +1,23 @@
 // src/components/Signup.jsx
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { signup } from '../../services/authService';
-import '../css/main.css';
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { signup } from "../../services/authService";
+import Foods from "../css/Signup_Images/Food.png";
+import "../css/main.css";
+import "../css/Signup.css";
 const Signup = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [pin, setPin] = useState('');
-  const [gmapLink, setGmapLink] = useState('');
-  const [address, setAddress] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [pin, setPin] = useState("");
+  const [gmapLink, setGmapLink] = useState("");
+  const [address, setAddress] = useState("");
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username || !password || !pin || !gmapLink || !address) {
-      alert('Please fill all required fields');
+      alert("Please fill all required fields");
       return;
     }
 
@@ -29,11 +30,11 @@ const Signup = () => {
         gMapLink: gmapLink,
         address,
       });
-      alert('Signup successful!');
+      alert("Signup successful!");
       // Redirect to login page after successful signup
-      window.location.href = '/login';
+      window.location.href = "/login";
     } catch (error) {
-      setError('Failed to create account' + error.message);
+      setError("Failed to create account" + error.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -41,29 +42,37 @@ const Signup = () => {
 
   return (
     <div className="signup-page">
-      <h1>Signup</h1>
-      <form onSubmit={handleSubmit}>
+      <div class="food_img">
+        <div class="food_div">
+          <img src={Foods} class="food" />
+        </div>
+      </div>
+      <div class="signup_details">
+        <div class="signup_text">Signup</div>
         <div className="form-group">
-          <label>Username:</label>
           <input
+            class="new_username"
+            placeholder="Username"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </div>
-        <div className="form-group">
-          <label>Password:</label>
           <input
+            class="new_password"
             type="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
+
         <div className="form-group">
-          <label>Phone Number:</label>
+          <input class="Country_code" type="tel" placeholder="+91" required />
           <input
+            class="Phone_no"
+            placeholder="Phone no."
             type="tel"
             value={pin}
             onChange={(e) => setPin(e.target.value)}
@@ -71,31 +80,39 @@ const Signup = () => {
           />
         </div>
         <div className="form-group">
-          <label>Google Maps Link:</label>
           <input
+            placeholder="Google Maps Link"
+            class="Maps_link"
             type="text"
             value={gmapLink}
             onChange={(e) => setGmapLink(e.target.value)}
             required
           />
+          <Link to="https://www.google.co.in/maps" class="Google_maps" > <i class="fa-solid fa-location-arrow fa-1x" ></i></Link>
         </div>
         <div className="form-group">
-          <label>Address:</label>
           <input
+            placeholder="Address"
+            class="Address"
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
           />
         </div>
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Signing up...' : 'Signup'}
-        </button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-      </form>
-      <p>
-        Already registered? <Link to="/login">Login</Link>
-      </p>
+        <form onSubmit={handleSubmit}>
+          <button class="submit_btn" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Signing up..." : "Signup"}
+          </button>
+          {error && <p style={{ color: "red" }}>{error}</p>}
+        </form>
+        <div class="Already_registered">
+          Already registered?{" "}
+          <Link to="/login" class="Login_link">
+            Login
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
