@@ -1,70 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&family=Bagel+Fat+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.login-page {
+  font-family: Arial, sans-serif;
+  background-image: url(../css/Login_Images/Background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+}
 
-  .login-page h1 {
-    text-align: Left;
-    font-size: 32px;
-    margin-bottom: 20px;
-  }
-  
-  .login-page p {
-    text-align: center;
-    font-size: 14px;
-    color: #666;
-  }
-  
+.menu_btn {
+  display: flex;
+  position: relative;
+  top: 2vw;
+  left: 2vw;
+  gap: 0.4vh;
+}
 
-  .facebook-btn {
-    background-color: #4267b2; 
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 50px;
-    width: calc(100% - 20px);
-    margin-bottom: 20px;
-  }
-  
-  .facebook-btn:hover {
-    background-color: #365899;
-  }
-  
-  .facebook-btn span {
-    font-size: 16px;
-  }
+.Middle_img {
+  position: relative;
+  width: 100%;
+  height: 62vw;
 
-  .divider {
-    text-align: center;
-  }
-  
-  .divider span {
-    color: #666666;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 6vh;
+}
 
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    font-weight: bold;
-  }
-  
-  input {
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: calc(100% - 20px); 
-  }
-  
+.Bowl-img {
+  position: absolute;
+  top: 10vw;
+  width: 40vw;
+  max-width: 150px;
+  height: auto;
+  object-fit: contain;
+  animation: spin 30s linear infinite reverse;
+}
 
-  button.submit-btn {
-    background-color: #1db954; 
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 50px; 
+.curved-text {
+  background: linear-gradient(200deg, black 50%, white 50%);
+  box-shadow: -2vw 10vw 5vw rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 10vw;
+  width: 40vw;
+  max-width: 150px;
+  height: 40vw;
+  max-height: 150px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotateZ(-65deg);
+  font-family: "Bagel Fat One", cursive;
+}
+
+.curved-text span {
+  position: absolute;
+  transform: rotate(calc(var(--i) * 10deg)) translateY(-24vw);
+  transform-origin: center;
+  font-size: 5vw;
+  color: #0d522c;
+  white-space: nowrap;
+}
+
+.triangle1 {
+  position: absolute;
+  top: 42vw;
+  left: 29.5vw;
+  transform: rotateZ(55deg);
+  width: 0;
+  height: 0;
+
+  border-left: 1.5vw solid transparent;
+  border-right: 1.5vw solid transparent;
+  border-bottom: 8.2vw solid #e1eebc;
+}
+.triangle2 {
+  position: absolute;
+  top: 37vw;
+  left: 27vw;
+  transform: rotateZ(80deg);
+  width: 0;
+  height: 0;
+
+  border-left: 1.5vw solid transparent;
+  border-right: 1.5vw solid transparent;
+  border-bottom: 7vw solid #e1eebc;
+}
+.triangle3 {
+  position: absolute;
+  top: 46vw;
+  left: 33.5vw;
+  transform: rotateZ(35deg);
+  width: 0;
+  height: 0;
+  border-left: 1.5vw solid transparent;
+  border-right: 1.5vw solid transparent;
+  border-bottom: 7.8vw solid #e1eebc;
+}
+.triangle4 {
+  position: absolute;
+  top: 49vw;
+  left: 39.5vw;
+  transform: rotateZ(10deg);
+  width: 0;
+  height: 0;
+
+  border-left: 1.5vw solid transparent;
+  border-right: 1.5vw solid transparent;
+  border-bottom: 7vw solid #e1eebc;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+.login_details {
+  position: relative;
+  top: 6vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 50vw;
+  margin-bottom: 7vw;
+  font-family: "Alata";
+  font-weight: 100;
+  letter-spacing: 0.5vw;
+}
+.login_text {
+  margin: 0%;
+  font-size: 10vw;
+  color: #e1eebc;
+}
+.username,
+.password {
+  background-color: #90c67c;
+  height: 13vw;
+  width: 75vw;
+  border: none;
+  border-radius: 4vw;
+  padding-left: 4vw;
+  font-size: 4vw;
+  font-family: "Alata";
+}
+.username::placeholder,
+.password::placeholder {
+  color: #0d522c;
+}
+.username:focus,
+.password:focus {
+  outline: none;
+  outline: 2px solid black;
+}
+.buttons_div {
+  position: relative;
+  top: 6vh;
+  padding: 5vw;
+  background-color: #90c67c;
+  height: 80vw;
+  border-top-right-radius: 15vw;
+  border-top-left-radius: 15vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.forget_password {
+  font-size: 4vw;
+  text-decoration: none;
+  color: #0d522c;
+  font-family: "Alata";
+  font-weight: 550;
+}
+.login_btn,
+.signup_btn {
+  background-color: #3c7962;
+  height: 13vw;
+  width: 75vw;
+  border: none;
+  border-radius: 4vw;
+  padding-left: 4vw;
+  font-size: 5vw;
+  font-family: "Poppins";
+  color: #e1eebc;
+  font-weight: 500;
+}
+.signup_btn {
+  background-color: #e1eebc;
+  color: #0d522c;
+}
+.or {
+  font-size: 5vw;
+  color: #0d522c;
+}
