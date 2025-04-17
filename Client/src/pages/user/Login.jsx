@@ -18,7 +18,7 @@ const Login = () => {
       // Redirect to dashboard or home page after successful login
       window.location.href = "/dashboard";
     } catch (error) {
-      setError("Invalid username or password" + error);
+      setError("Invalid username or password");
     }
   };
 
@@ -64,11 +64,7 @@ const Login = () => {
           required
         />
       </div>
-      <div class="buttons_div">
-        <Link to="/reset_password" class="forget_password">
-          <p >Forget Password </p>
-        </Link>
-
+      <div class="buttons_div center">
         <form onSubmit={handleSubmit}>
           <button type="submit" class="login_btn">Login</button>
           {error && <p style={{ color: "red" }}>{error}</p>}

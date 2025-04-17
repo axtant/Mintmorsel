@@ -4,6 +4,11 @@
   "main": "src/index.ts",
   "compatibility_date": "2025-03-28",
   "compatibility_flags": ["nodejs_compat"],
+  "durable_objects": {
+    "bindings": [
+      { "name": "ORDER_MANAGER", "class_name":"OrderManagerDO" }
+    ]
+  },
   "vars": {
     "DATABASE_URL":"prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMTg5MDJhNmEtYmViZS00Nzg5LTkyOGQtZTg5MGUwZjRiODYxIiwidGVuYW50X2lkIjoiYzNjMDQxYzIyNjY0Yzg4MWUyNTQyMTA2YmJmNDBiMGU2YWIwNTljNGRkODNjMTUxZWI5MzdiZGU5M2FiMDc2NiIsImludGVybmFsX3NlY3JldCI6ImM1ZjYzMDU1LTQ5YzYtNGY3Zi1hMDYyLWUwMWQ3YzMxNDNjZSJ9.rjNMG7r0tzKhbsaxFpp3Bc-bjCXVc9ZZBJv9em1Zrms"
   }

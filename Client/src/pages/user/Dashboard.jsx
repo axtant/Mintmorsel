@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import { fetchMenu } from "../../services/menuService";
 import { useCart } from "../../context/CartContext";
+import "./../css/dashboard.css";
 
 const CATEGORIES = ["All", "Veg", "Chicken", "Egg", "Add ons"];
 
