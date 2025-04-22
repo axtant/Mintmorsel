@@ -13,7 +13,7 @@ const OrderConfirmation = () => {
 
   useEffect(() => {
     const websocket = new WebSocket(WEBSOCKET_URL);
-    const user = JSON.parse(localStorage.getItem('user')); // Fetch user details
+    const user = JSON.parse(localStorage.getItem('user')) || {}; // Fetch user details
 
     websocket.onopen = () => {
       const orderData = {
@@ -22,13 +22,13 @@ const OrderConfirmation = () => {
           paymentMethod,
           items: cartItems,
           total: totalAmount,
-          user: { // Include user details
-            name: user?.username,
-            phone: user?.pin,
-            address: user?.address
+          user: {
+            name: user.username || 'Guest',
+            phone: user.phone || 'N/A',  // Adjust key as needed
+            address: user.address || 'N/A',
           },
-          timestamp: new Date().toISOString()
-        }
+          timestamp: new Date().toISOString(),
+        },
       };
       websocket.send(JSON.stringify(orderData));
     };

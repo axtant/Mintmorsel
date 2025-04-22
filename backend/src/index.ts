@@ -7,10 +7,10 @@ const app = new Hono();
 
 app.use(
   cors({
-    origin: 'http://localhost:5173', // Frontend URL
-    credentials: true, // Allow cookies
-    allowMethods: ['GET', 'POST', 'OPTIONS'], // Allowed HTTP methods
-    allowHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+    origin: 'http://localhost:5173',
+    credentials: true,
+    allowMethods: ['GET', 'POST', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization'],
   })
 );
 
