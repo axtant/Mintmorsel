@@ -5,7 +5,7 @@ const OrderDashboard = () => {
   const [ws, setWs] = useState(null);
 
   useEffect(() => {
-    const websocket = new WebSocket('ws://127.0.0.1:8787/');
+    const websocket = new WebSocket('ws://127.0.0.1:62814/');
     setWs(websocket);
 
     websocket.onopen = () => {

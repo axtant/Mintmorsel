@@ -69,21 +69,25 @@ export class OrderManager implements DurableObject {
 
   private async handleOrder(ws: WebSocket, data: any) {
     const orderId = `ORDER-${Date.now()}`;
-    const order: Order = {
+    const order = {
       orderId,
-      items: data.items,
-      status: 'pending'
+      items: data.data.items,
+      status: 'pending',
+      paymentMethod: data.data.paymentMethod,
+      total: data.data.total,
+      timestamp: data.data.timestamp,
+      user: data.data.user
     };
 
     // Persist order
     await this.storage.put(orderId, order);
 
-    // Broadcast to admin dashboard
+    // Broadcast the new order to all connected clients (dashboard)
     this.broadcast({
       type: 'new_order',
       order
     });
-
+    
     ws.send(JSON.stringify({ 
       type: 'order_ack', 
       orderId 
