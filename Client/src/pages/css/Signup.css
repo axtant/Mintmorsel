@@ -1,210 +1,212 @@
-@import url("https://fonts.googleapis.com/css2?family=Alata&family=Bagel+Fat+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-:root{
-  --c1:#90c67c
+@import url("https://fonts.googleapis.com/css2?family=Alata&family=Bagel+Fat+One&family=Poppins:wght@100;400;600;700&display=swap");
+
+:root {
+  --c1: #90c67c;
+  --c2: #e1eebc;
+  --c3: #0d522c;
+  --dark-bg: rgba(39, 39, 39, 0.85);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .signup-page {
   position: relative;
-  overflow: hidden;
-  height: 222vw;
-  background: url(../css/Signup_Images/Signup_bg.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  background: url(../css/Signup_Images/bg.jpg) center/cover no-repeat;
 }
 
 .signup-page::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 222vw;
-  background: rgba(39, 39, 39, 0.6);
+  inset: 0;
+  background: var(--dark-bg);
   z-index: 0;
 }
 
-h1 {
-  margin: 0;
-  padding: 0;
-}
 .food {
-  height: 110vw;
-  width: 110vw;
+  width: 80%;
+  height: auto;
   animation: stepRotate 10s ease-in-out infinite;
 }
-.food_div {
-  width: 110vw;
-  height: 115vw;
-  background-color: #5b5b5b;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-}
-.food_img {
-  overflow: hidden;
-  position: absolute;
-  top: -58vw;
-  left: -5vw;
-}
-@keyframes stepRotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  45% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-  95% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+
 .signup_details {
-  
   position: relative;
-  top: 60vw;
-  height: 140vw;
-  color: #e1eebc;
+  z-index: 1;
+  padding: 2rem;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
   flex-direction: column;
+  gap: 1.5rem;
+  color: var(--c2);
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
 }
+
 .signup_text {
-  font-family: "Poppins";
-  font-weight: 600;
-  font-size: 10vw;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
 }
-.new_username::placeholder,
-.new_password::placeholder,
-.Phone_no::placeholder,
-.Country_code::placeholder,
-.Maps_link::placeholder,
-.Address::placeholder {
-  color: #0d522c;
-}
-.new_username:focus,
-.new_password:focus,
-.Phone_no:focus,
-.Country_code:focus,
-.Maps_link:focus,
-.Address:focus {
-  outline: none;
-  outline: 2px solid black;
-}
-.new_username {
-  background-color: var(--c1);
-  height: 13vw;
-  width: 35vw;
-  border: none;
-  border-radius: 4vw;
-  padding-left: 4vw;
-  font-size: 4vw;
-  font-family: "Alata";
-}
+
 .form-group {
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 95vw;
+  gap: 1rem;
+  width: 100%;
 }
-.new_password {
+
+input {
   background-color: var(--c1);
-  height: 13vw;
-  width: 35vw;
   border: none;
-  border-radius: 4vw;
-  padding-left: 4vw;
-  font-size: 4vw;
-  font-family: "Alata";
+  border-radius: 1rem;
+  padding: 1rem;
+  font-family: "Alata", sans-serif;
+  font-size: 1rem;
+  color: var(--c3);
+  width: 100%;
 }
+
+input::placeholder,.Address::placeholder {
+  color: var(--c3);
+  opacity: 0.8;
+}
+
+input:focus,.Address:focus {
+  outline: 2px solid var(--c3);
+  box-shadow: 0 0 0 3px rgba(13, 82, 44, 0.2);
+}
+
 .Country_code {
-  background-color: var(--c1);
-  height: 13vw;
-  width: 10vw;
-  border: none;
-  border-radius: 4vw;
-  padding-left: 4vw;
-  font-size: 4vw;
-  font-family: "Alata";
+  max-width: 80px;
+  text-align: center;
+  padding: 1rem 0.5rem;
 }
+
 .Google_maps {
-  text-decoration: none;
   background-color: var(--c1);
-  height: 13vw;
-  width: 10vw;
-  border: none;
-  color:#0d522c;
+  color: var(--c3);
+  border-radius: 2rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
-  border-radius: 4vw;
-  padding-left: 4vw;
-  font-size: 6vw;
-  font-family: "Alata";
-}
-.Phone_no {
-  background-color: var(--c1);
-  height: 13vw;
-  width: 60vw;
-  border: none;
-  border-radius: 4vw;
-  padding-left: 4vw;
-  font-size: 4vw;
-  font-family: "Alata";
-}
-.Maps_link {
-  background-color: var(--c1);
-  height: 13vw;
-  width: 60vw;
-  border: none;
-  border-radius: 4vw;
-  padding-left: 4vw;
-  font-size: 4vw;
-  font-family: "Alata";
-}
-.Address {
-  background-color: var(--c1);
-  height: 25vw;
-  width: 80vw;
-  border: none;
-  border-radius: 4vw;
-  padding-left: 4vw;
-  font-size: 4vw;
-  font-family: "Alata";
-}
-.submit_btn{
-  background-color: #e1eebc;
-  height: 13vw;
-  width: 85vw;
-  border: none;
-  border-radius: 4vw;
-  padding-left: 4vw;
-  font-size: 5vw;
-  font-family: "Poppins";
-  color: #0d522c;
-  font-weight: 500;
-}
-.Already_registered{
-  font-family: "Poppins";
-  font-size: 4.5vw;
-}
-.Login_link{
+  justify-content: center;
+  min-width: 50px;
   text-decoration: none;
-  color: var(--c1);
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
 }
-.Address-input {
-  width: 100%;           /* Full width of the parent */
-  min-height: 100px;     /* Multi-line appearance */
-  font-size: 16px;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+
+.Google_maps:hover {
+  transform: scale(1.05);
+}
+
+.Address {
+  min-height: 100px;
   line-height: 1.5;
-  resize: none;          /* Prevent user resizing if not wanted */
-  overflow-wrap: break-word;
+  word-break: break-word; /* Ensures words break and wrap */
+  resize: vertical; /* Allows vertical resizing */
+  overflow: auto; /* Enable scrollbar when content overflows */
+  background-color: var(--c1);
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem;
+  font-family: "Alata", sans-serif;
+  font-size: 1rem;
+  color: var(--c3);
+  width: 100%;
+}
+
+
+.submit_btn {
+  background-color: var(--c2);
+  color: var(--c3);
+  border: none;
+  border-radius: 2rem;
+  padding: 1rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.submit_btn:hover:not(:disabled) {
+  background-color: var(--c3);
+  color: var(--c2);
+}
+
+.submit_btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.Already_registered {
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.Login_link {
+  color: var(--c1);
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.Login_link:hover {
+  color: var(--c2);
+}
+
+@keyframes stepRotate {
+  0%, 45% { transform: rotate(0deg); }
+  50%, 95% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .signup-page {
+    grid-template-columns: 1fr 1fr;
+    display: flex;
+    align-items: center;
+  }
+
+  .signup_details {
+    padding: 2rem;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-group {
+    flex-direction: row;
+  }
+
+  .Address {
+    min-height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-group {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .Country_code {
+    max-width: 100%;
+  }
+
+  .signup_text {
+    font-size: 2rem;
+  }
 }
