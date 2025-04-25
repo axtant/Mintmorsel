@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signup } from "../../services/authService";
-import Foods from "../css/Signup_Images/Food.png";
 import "../css/main.css";
 import "../css/Signup.css";
 const Signup = () => {
@@ -42,11 +41,6 @@ const Signup = () => {
 
   return (
     <div className="signup-page">
-      <div class="food_img">
-        <div class="food_div">
-          <img src={Foods} class="food" />
-        </div>
-      </div>
       <div class="signup_details">
         <div class="signup_text">Signup</div>
         <div className="form-group">
@@ -69,7 +63,6 @@ const Signup = () => {
         </div>
 
         <div className="form-group">
-          <input class="Country_code" type="tel" placeholder="+91" required />
           <input
             class="Phone_no"
             placeholder="Phone no."
@@ -88,13 +81,15 @@ const Signup = () => {
             onChange={(e) => setGmapLink(e.target.value)}
             required
           />
-          <Link to="https://www.google.co.in/maps" class="Google_maps" > <i class="fa-solid fa-location-arrow fa-1x" ></i></Link>
+          <Link to="https://www.google.co.in/maps" class="Google_maps">
+            {" "}
+            <i class="fa-solid fa-location-arrow fa-1x"></i>
+          </Link>
         </div>
         <div className="form-group">
-          <input
+          <textarea
             placeholder="Address"
-            class="Address"
-            type="text"
+            className="Address" // Use className instead of class in React
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
