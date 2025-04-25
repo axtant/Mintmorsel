@@ -7,7 +7,7 @@ const app = new Hono();
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin:['http://localhost:5173', 'https://mintmorsel.vercel.app'],
     credentials: true,
     allowMethods: ['GET', 'POST', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization'],
