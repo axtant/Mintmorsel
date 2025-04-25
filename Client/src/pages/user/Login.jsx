@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { login } from "../../services/authService";
 import "../css/main.css";
-import "../css/Login.css";
+import "../css/login.css";
 import Foods from "../css/Signup_Images/Food.png";
 
 const Login = () => {
