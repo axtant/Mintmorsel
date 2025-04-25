@@ -1,18 +1,19 @@
-import { DurableObject, DurableObjectState, WebSocketPair } from '@cloudflare/workers-types';
+import WebSocket, { WebSocketServer } from 'ws';
+import http from 'http';
 
-export interface OrderItem {
+interface OrderItem {
   itemName: string;
   quantity: number;
   price: number;
 }
 
-export interface User {
+interface User {
   name: string;
   phone: number;
   address: string;
 }
 
-export interface Order {
+interface Order {
   orderId: string;
   items: OrderItem[];
   amount: number;
@@ -22,145 +23,126 @@ export interface Order {
   timestamp: string;
 }
 
-export class OrderManagerDO implements DurableObject {
-  private orders = new Map<string, Order>();
-  private sockets = new Set<WebSocket>();
+const orders: Map<string, Order> = new Map();
+const activeConnections: Set<WebSocket> = new Set();
 
-  constructor(private state: DurableObjectState, private env: any) {}
+const server = http.createServer((request, response) => {
+  response.end("hi there");
+});
 
-  async fetch(request: Request) {
-    // Handle WebSocket upgrade
-    if (request.headers.get("Upgrade") !== "websocket") {
-      return new Response("Expected websocket", { status: 400 });
-    }
+const wss = new WebSocketServer({ server });
 
-    const pair = new WebSocketPair();
-    const [client, server] = [pair[0], pair[1]];
+wss.on("connection", (ws) => {
+  activeConnections.add(ws);
+  console.log("New client connected");
+  ws.send(JSON.stringify({ type: 'status', message: 'Connected to server' }));
 
-    this.handleWebSocket(server);
-
-    return new Response(null, {
-      status: 101,
-      webSocket: client,
-    });
-  }
-
-  private async handleWebSocket(ws: WebSocket) {
-    ws.accept();
-    this.sockets.add(ws);
-
-    ws.addEventListener("message", (event) => {
-      try {
-        const data = JSON.parse(event.data);
-        switch (data.type) {
-          case "order":
-            this.handleOrder(ws, data.data);
-            break;
-          case "order_status_update":
-            this.handleStatusUpdate(data);
-            break;
-          default:
-            ws.send(
-              JSON.stringify({ type: "error", message: "Unknown message type" })
-            );
-        }
-      } catch (e) {
-        ws.send(
-          JSON.stringify({ type: "error", message: "Invalid JSON message" })
-        );
-      }
-    });
-
-    ws.addEventListener("close", () => {
-      this.sockets.delete(ws);
-    });
-
-    ws.addEventListener("error", (err) => {
-      console.error("WebSocket error:", err);
-      this.sockets.delete(ws);
-    });
-  }
-
-  private broadcast(message: any) {
-    const msg = JSON.stringify(message);
-    for (const socket of this.sockets) {
-      if (socket.readyState === WebSocket.OPEN) {
-        socket.send(msg);
-      }
-    }
-  }
-
-  private handleOrder(ws: WebSocket, data: any) {
+  ws.on("message", async (message) => {
     try {
-      const { paymentMethod, items, user, timestamp } = data;
+      const data = JSON.parse(message.toString());
+      console.log('Received message:', data);
 
-      if (!Array.isArray(items) || items.length === 0) {
-        throw new Error("Invalid items");
+      switch (data.type) {
+        case "order":
+          await handleOrderPlacement(ws, data);
+          break;
+        case "status_update":
+          await handleStatusUpdate(data);
+          break;
+        default:
+          console.log('Unknown message type:', data.type);
       }
-
-      const orderId = `ORDER-${Date.now()}`;
-      const processedItems = items.map((item: any) => ({
-        itemName: item.itemName,
-        quantity: item.quantity,
-        price: item.price,
-      }));
-
-      const totalAmount = processedItems.reduce(
-        (acc: number, item: any) => acc + item.price * item.quantity,
-        0
-      );
-
-      const order: Order = {
-        orderId,
-        items: processedItems,
-        amount: totalAmount,
-        paymentMethod,
-        user,
-        status: "pending",
-        timestamp,
-      };
-
-      this.orders.set(orderId, order);
-
-      // Persist state (optional)
-      this.state.storage.put(orderId, order);
-
-      console.log(`Order Received: ${orderId}`);
-
-      // Broadcast to all clients
-      this.broadcast({
-        type: "order_received",
-        orderId,
-        items: processedItems,
-        amount: totalAmount,
-        user,
-        status: "pending",
-      });
-
-      // Acknowledge sender
-      ws.send(JSON.stringify({ type: "order_ack", orderId }));
     } catch (error) {
-      console.error("Error handling order:", error);
-      ws.send(JSON.stringify({ type: "error", message: error }));
+      console.error('Error parsing message:', error);
+      ws.send(JSON.stringify({ 
+        type: 'error', 
+        message: error instanceof Error ? error.message : 'Invalid request' 
+      }));
     }
-  }
+  });
 
-  private handleStatusUpdate(data: any) {
-    const { orderId, status } = data;
-    if (!this.orders.has(orderId)) {
-      console.error(`Order ${orderId} does not exist`);
-      return;
+  ws.on("close", () => {
+    activeConnections.delete(ws);
+    console.log("Client disconnected");
+  });
+
+  ws.on("error", (error) => {
+    console.error('WebSocket error:', error);
+    activeConnections.delete(ws);
+  });
+});
+
+const handleOrderPlacement = async (ws: WebSocket, data: any) => {
+  try {
+    const { paymentMethod, items, user, timestamp } = data.data;
+    
+    if (!Array.isArray(items) || items.length === 0) {
+      throw new Error("Invalid items structure");
     }
-    const order = this.orders.get(orderId)!;
-    order.status = status;
-    this.orders.set(orderId, order);
-    this.state.storage.put(orderId, order);
 
-    // Broadcast status update
-    this.broadcast({
-      type: "order_status_update",
+    const orderId = `ORDER-${Date.now()}`;
+    const totalAmount = items.reduce(
+      (acc: number, item: OrderItem) => acc + item.price * item.quantity, 
+      0
+    );
+
+    const order: Order = {
       orderId,
-      status,
+      items,
+      amount: totalAmount,
+      paymentMethod,
+      user,
+      status: "pending",
+      timestamp,
+    };
+
+    orders.set(orderId, order);
+    console.log(`Order Received: ${orderId}`);
+
+    broadcast({
+      type: "new_order",
+      order
     });
+
+    ws.send(JSON.stringify({ 
+      type: 'order_ack', 
+      orderId 
+    }));
+  } catch (error) {
+    console.error('Error handling order placement:', error);
+    ws.send(JSON.stringify({ 
+      type: 'error', 
+      message: 'Failed to process order' 
+    }));
   }
+};
+
+const handleStatusUpdate = async (data: any) => {
+  const order = orders.get(data.orderId);
+  if (!order) {
+    console.error(`Order ${data.orderId} not found`);
+    return;
+  }
+
+  order.status = data.status;
+  orders.set(data.orderId, order);
+
+  broadcast({
+    type: "status_update",
+    orderId: data.orderId,
+    status: data.status
+  });
+};
+
+function broadcast(message: object) {
+  const msg = JSON.stringify(message);
+  activeConnections.forEach(ws => {
+    if (ws.readyState === WebSocket.OPEN) {
+      ws.send(msg);
+    }
+  });
 }
+
+server.listen(8081, () => {
+  console.log((new Date()) + ' Server is listening on port 8081');
+});
