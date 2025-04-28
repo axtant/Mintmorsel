@@ -14,8 +14,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login({ username, password }); // Send credentials to backend
-      // Redirect to dashboard or home page after successful login
+      await login({ username, password });
       window.location.href = "/dashboard";
     } catch (error) {
       setError("Invalid username or password " + error);
@@ -24,15 +23,15 @@ const Login = () => {
 
   return (
     <div className="login-page">
-      <div class="food_img">
-        <div class="food_div">
-          <img src={Foods} class="food" />
+      <div className="login-food-img">
+        <div className="login-food-div">
+          <img src={Foods} className="login-food" alt="Food" />
         </div>
       </div>
-      <div class="login_details">
-        <h1 class="login_text">MINTMORSEL</h1>
+      <div className="login-details">
+        <h1 className="login-text">MINTMORSEL</h1>
         <input
-          class="username"
+          className="login-username"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -40,7 +39,7 @@ const Login = () => {
           required
         />
         <input
-          class="password"
+          className="login-password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -48,17 +47,16 @@ const Login = () => {
           required
         />
         {error && (
-          <p className="error text-red-500 text-center mt-2">{error}</p>
+          <p className="login-error text-red-500 text-center mt-2">{error}</p>
         )}
-        <div class="buttons_div center">
+        <div className="login-buttons-div center">
           <form onSubmit={handleSubmit}>
-            <button type="submit" class="login_btn" onSubmit={handleSubmit}>
+            <button type="submit" className="login-btn">
               Login
             </button>
           </form>
-
           <Link to="/signup">
-            <button type="button" class="signup_btn">
+            <button type="button" className="login-signup-btn">
               Create an account
             </button>
           </Link>
