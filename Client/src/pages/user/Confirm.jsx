@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
+import "./../css/Confirm.css"
 
 const Confirm = () => {
   const [totalAmount, setTotalAmount] = useState(0);
@@ -27,11 +28,12 @@ const Confirm = () => {
     <div className="confirm-payments">
       <Header title="Payment Method" showBackButton={true} />
       
-      <div className="grid gap-6 justify-center my-6 mt-20">
+      <div className="confirm-button-group">
         <button
           onClick={() => handlePaymentMethod('COD')}
-          className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
+          className="confirm-payment-btn confirm-payment-cod"
         >
+          <span className="confirm-payment-icon">💰</span>
           Cash on Delivery
         </button>
 
@@ -41,9 +43,10 @@ const Confirm = () => {
             window.open(upiPaymentUrl, '_blank');
             handlePaymentMethod('GPay');
           }}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="confirm-payment-btn confirm-payment-gpay"
         >
-          Pay with GPAY
+          <span className="confirm-payment-icon">📱</span>
+          Pay with GPay
         </button>
       </div>
     </div>

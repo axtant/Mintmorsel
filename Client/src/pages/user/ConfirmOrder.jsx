@@ -81,10 +81,10 @@ const OrderConfirmation = () => {
             <h2 className="text-2xl font-bold mt-4">Order Confirmed!</h2>
             <p className="mt-2">Your order ID: #{orderId}</p>
             <button
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/logout')}
               className="mt-6 bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
             >
-              Back to Home
+              Logout
             </button>
           </div>
         ) : (

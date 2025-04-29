@@ -1,90 +1,222 @@
-/* General Styling */
-@import "tailwindcss";
+/* Dashboard Component Styles */
 
-.dashboard {
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Header */
-  
-  /* Search Bar */
-  .search-bar {
-    margin-top: 100px;
-    padding: 10px;
-  }
-  
-  .search-bar {
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-  }
-  
-  /* Categories */
-  .categories {
-    display: flex;
-    overflow-x: auto;
-    padding: 10px;
-    color:#007bff;
-  }
-  
-  .category-btn {
-    /* flex-shrink: 0;
-    margin-right: 10px;
-    padding: 10px;
-    background-color: #007bff;
-    border-radius: 5px; */
-    
-    flex-shrink: 0;
-    margin-right: 0px;
-    padding: 5px;
-    background-color: #599ae0;
-    border-radius: 10px;
-    width: 99px;
-  }
-  
-  .category-btn:hover {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  /* Menu Items */
-  .menu {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .menu-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
-  }
-
-  .menu-item button {
-    width: 50px;
-    padding: 5px;
-    transition: background-color 0.3s ease; 
+/* Container */
+.dashboard-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fafb;
+  padding: 1rem 1.5rem 4rem; /* bottom padding for footer space */
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-.menu-item button:hover {
-    opacity: 0.9; 
+/* Search Bar */
+.dashboard-search {
+  margin: 1rem 0;
 }
-  
-  .menu-item span {
-    font-family: sans-serif;
+
+.dashboard-search input[type="text"] {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid #d1d5db; /* Tailwind gray-300 */
+  border-radius: 0.375rem; /* 6px */
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  margin-top: 15px;
+}
+
+.dashboard-search input[type="text"]:focus {
+  outline: none;
+  border-color: #3b82f6; /* Tailwind blue-500 */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Categories */
+.dashboard-categories {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: #93c5fd transparent;
+}
+
+.dashboard-categories::-webkit-scrollbar {
+  height: 6px;
+}
+
+.dashboard-categories::-webkit-scrollbar-thumb {
+  background-color: #93c5fd;
+  border-radius: 3px;
+}
+
+.dashboard-category-btn {
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 0.5rem;
+  background-color: #bfdbfe; /* Tailwind blue-200 */
+  color: #1e40af; /* Tailwind blue-900 */
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  user-select: none;
+}
+
+.dashboard-category-btn:last-child {
+  margin-right: 0;
+}
+
+.dashboard-category-btn:hover {
+  background-color: #3b82f6; /* Tailwind blue-500 */
+  color: white;
+}
+
+.dashboard-category-btn.active {
+  background-color: #2563eb; /* Tailwind blue-600 */
+  color: white;
+}
+
+/* Menu Items */
+.dashboard-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dashboard-menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb; /* Tailwind gray-200 */
+  padding: 0.75rem 0;
+}
+
+.dashboard-menu-item-info {
+  max-width: 70%;
+}
+
+.dashboard-menu-item-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.2rem;
+  color: #111827; /* Tailwind gray-900 */
+}
+
+.dashboard-menu-item-desc {
+  font-size: 0.875rem;
+  color: #6b7280; /* Tailwind gray-500 */
+  line-height: 1.2;
+}
+
+/* Cart Controls */
+.dashboard-cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dashboard-cart-btn {
+  background-color: #10b981; /* Tailwind green-500 */
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.3rem 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  min-width: 30px;
+  text-align: center;
+  line-height: 1;
+}
+
+.dashboard-cart-btn:hover {
+  background-color: #059669; /* Tailwind green-600 */
+}
+
+.dashboard-cart-btn-remove {
+  background-color: #ef4444; /* Tailwind red-500 */
+}
+
+.dashboard-cart-btn-remove:hover {
+  background-color: #dc2626; /* Tailwind red-600 */
+}
+
+.dashboard-cart-quantity {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #374151; /* Tailwind gray-700 */
+}
+
+/* Add Button (when item not in cart) */
+.dashboard-add-btn {
+  background-color: #10b981; /* Tailwind green-500 */
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.4rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.dashboard-add-btn:hover {
+  background-color: #059669; /* Tailwind green-600 */
+}
+
+/* Footer Cart Summary */
+.dashboard-cart-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.dashboard-cart-footer p {
+  font-weight: 600;
+  color: #1f2937; /* Tailwind gray-800 */
+}
+
+.dashboard-cart-footer-link {
+  background-color: #3b82f6; /* Tailwind blue-500 */
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.25s ease;
+  user-select: none;
+}
+
+.dashboard-cart-footer-link:hover {
+  background-color: #2563eb; /* Tailwind blue-600 */
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+  .dashboard-menu-item-info {
+    max-width: 60%;
   }
-  
-  /* Footer */
-  .footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color:#007bff ;
-    color:white;
-    text-align:center;
-    padding:10px;
-    border-radius:10px 10px 0px 0px;
+
+  .dashboard-cart-controls {
+    gap: 0.3rem;
+  }
+
+  .dashboard-cart-btn, .dashboard-add-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+  }
 }
-  
