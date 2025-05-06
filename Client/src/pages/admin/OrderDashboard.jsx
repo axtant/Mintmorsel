@@ -5,7 +5,7 @@ const OrderDashboard = () => {
   const [ws, setWs] = useState(null);
 
   useEffect(() => {
-    const websocket = new WebSocket('ws://127.0.0.1:3000/');
+    const websocket = new WebSocket('wss://mintmorsel-production.up.railway.app/');
     setWs(websocket);
 
     websocket.onopen = () => {
