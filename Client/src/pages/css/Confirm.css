@@ -63,7 +63,7 @@
   /* Responsive Design */
   @media (max-width: 640px) {
     .confirm-button-group {
-      margin-top: 3rem;
+      margin-top: 1rem;
     }
   
     .confirm-payment-btn {

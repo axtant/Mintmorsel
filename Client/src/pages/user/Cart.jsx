@@ -1,17 +1,19 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { useCart } from "../../context/CartContext";
+import Confirm from "./Confirm"; // <-- Import your Confirm component
 import "./../css/Cart.css";
 
 const Cart = () => {
   const { cartItems, addToCart, removeFromCart } = useCart();
+  const [showPaymentOptions, setShowPaymentOptions] = React.useState(false);
   const navigate = useNavigate();
 
   if (!cartItems || cartItems.length === 0) {
     return (
       <div className="cart-container p-4 mt-13">
-        <Header title="Shopping Cart" showBackButton={true} />
+        <Header title="Shopping Cart" showBackButton={true} showLogOutButton={true} />
         <p className="cart-empty-message">Your cart is empty.</p>
         <div className="text-center">
           <button
@@ -77,14 +79,23 @@ const Cart = () => {
         </div>
       </div>
 
-      {/* Checkout Button */}
+      {/* Checkout Button or Payment Options */}
       <div className="text-center">
-        <Link
-          to="/confirm-payments"
-          className="cart-proceed-button"
-        >
-          Proceed to Payment
-        </Link>
+        {!showPaymentOptions ? (
+          <button
+            className="cart-proceed-button"
+            onClick={() => setShowPaymentOptions(true)}
+          >
+            Proceed to Payment
+          </button>
+        ) : (
+          // Render Confirm component inline
+          <Confirm
+            cartItems={cartItems}
+            totalAmount={totalPrice}
+            onBack={() => setShowPaymentOptions(false)} // Optional: to go back to cart
+          />
+        )}
       </div>
     </div>
   );

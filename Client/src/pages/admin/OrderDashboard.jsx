@@ -5,7 +5,7 @@ const OrderDashboard = () => {
   const [ws, setWs] = useState(null);
 
   useEffect(() => {
-    const websocket = new WebSocket('ws://127.0.0.1:62814/');
+    const websocket = new WebSocket('ws://127.0.0.1:3000/');
     setWs(websocket);
 
     websocket.onopen = () => {
@@ -64,11 +64,10 @@ const OrderDashboard = () => {
             <div key={order.orderId} className="order-item border-b pb-4 mb-4">
               <h3 className="font-bold">Order #{order.orderId}</h3>
               <p>Items: {order.items?.map(item => item.itemName).join(', ') || 'N/A'}</p>
-              <p>Total: ₹{order.amount ?? 'N/A'}</p>
+              <p>Total: ₹{order.total ?? 'N/A '}</p>
               <p>Customer Name: {order.user?.name || 'N/A'}</p>
               <p>Phone Number: {order.user?.phone || 'N/A'}</p>
               <p>Address: {order.user?.address || 'N/A'}</p>
-              <p>Status: {order.status}</p>
               {order.status === 'pending' && (
                 <div className="flex gap-2 mt-2">
                   <button
