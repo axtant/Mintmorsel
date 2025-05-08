@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Header from '../../components/Header';
 import { WEBSOCKET_URL } from '../../config/webSocketConfig';
+import styles from './../css/OrderConfirmation.module.css';
 
 const OrderConfirmation = () => {
   const location = useLocation();
@@ -82,49 +82,48 @@ const OrderConfirmation = () => {
   }, [orderStatus, navigate]);
 
   return (
-    <div className="order-confirmation">
-      <Header title="Order Status" showBackButton={false} />
-      <div className="p-4 mt-20 text-center">
-        {orderStatus === 'processing' && (
-          <div>
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto" />
-            <p className="mt-4">Sending order to kitchen...</p>
-          </div>
-        )}
-        {orderStatus === 'confirmed' && (
-          <div className="text-green-600">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-16 w-16 mx-auto"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-            <h2 className="text-2xl font-bold mt-4">Order Confirmed!</h2>
-            <p className="mt-2">Your order ID: #{orderId}</p>
-            <button
-              onClick={() => navigate('/logout')}
-              className="mt-6 bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
-            >
-              Logout
-            </button>
-          </div>
-        )}
-        {orderStatus === 'error' && (
-          <div className="text-red-600">
-            <h2 className="text-2xl font-bold mt-4">Order Failed!</h2>
-            <p>There was a problem placing your order. Redirecting to cart...</p>
-          </div>
-        )}
-      </div>
+    <div className={styles.container}>
+  {orderStatus === 'processing' && (
+    <div>
+      <div className={styles.spinner} />
+      <p className={styles.statusText}>Sending order to kitchen...</p>
     </div>
+  )}
+  {orderStatus === 'confirmed' && (
+    <div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className={styles.confirmationIcon}
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M5 13l4 4L19 7"
+        />
+      </svg>
+      <h2 className={styles.confirmationTitle}>Order Confirmed!</h2>
+      <p className={styles.orderId}>Your order ID: #{orderId}</p>
+      <button
+        onClick={() => navigate('/logout')}
+        className={styles.logoutButton}
+      >
+        Logout
+      </button>
+    </div>
+  )}
+  {orderStatus === 'error' && (
+    <div>
+      <h2 className={styles.errorText}>Order Failed!</h2>
+      <p className={styles.redirectMessage}>
+        There was a problem placing your order. Redirecting to cart...
+      </p>
+    </div>
+  )}
+</div>
   );
 };
 
