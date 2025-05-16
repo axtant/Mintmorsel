@@ -5,7 +5,7 @@ import { fetchMenu } from "../../services/menuService";
 import { useCart } from "../../context/CartContext";
 import "./../css/Dashboard.css";
 
-const CATEGORIES = ["All", "Veg", "Chicken", "Egg", "Add ons"];
+const CATEGORIES = ["All", "Veg", "Chicken", "Egg", "Add ons", "Extra"];
 
 const Dashboard = () => {
     const [menuItems, setMenuItems] = useState([]);
@@ -35,7 +35,7 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard p-4 mt-13 bg-gray-100 pb-16">
-            <Header title="Mintmorsel" showBackButton={false} showLogOutButton={false} />
+            <Header title="Mintmorsel" showBackButton={false} showLogOutButton={true} />
 
             <div className="dashboard-container p-4 mt-13 bg-gray-100 pb-16">
   {/* Search Bar */}

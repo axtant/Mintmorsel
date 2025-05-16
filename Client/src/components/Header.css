@@ -1,0 +1,81 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background-color: #f8fafc;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 60px;
+}
+
+.header-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.header-section.center {
+  justify-content: center;
+}
+
+.header-section.left {
+  justify-content: flex-start;
+}
+
+.header-section.right {
+  justify-content: flex-end;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.header-btn {
+  font-size: 1.25rem;
+  padding: 0.4rem 0.6rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #374151;
+  transition: color 0.2s;
+}
+
+.header-btn:hover {
+  color: #111827;
+}
+
+.logout-btn {
+  color: #dc2626;
+}
+
+.logout-btn:hover {
+  color: #b91c1c;
+}
+
+.back-btn {
+  color: #2563eb;
+}
+
+.back-btn:hover {
+  color: #1d4ed8;
+}
+
+@media (max-width: 640px) {
+  .header-title {
+    font-size: 1.2rem;
+  }
+
+  .header-btn {
+    font-size: 1rem;
+    padding: 0.3rem 0.5rem;
+  }
+}

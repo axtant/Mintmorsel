@@ -1,4 +1,3 @@
-// src/components/Login.jsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { login } from "../../services/authService";
@@ -10,14 +9,19 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
+    setLoading(true);
     try {
       await login({ username, password });
       window.location.href = "/dashboard";
     } catch (error) {
-      setError("Invalid username or password " + error);
+      setError("Invalid username or password");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,12 +55,12 @@ const Login = () => {
         )}
         <div className="login-buttons-div center">
           <form onSubmit={handleSubmit}>
-            <button type="submit" className="login-btn">
-              Login
+            <button type="submit" className="login-btn" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
             </button>
           </form>
           <Link to="/signup">
-            <button type="button" className="login-signup-btn">
+            <button type="button" className="login-signup-btn" disabled={loading}>
               Create an account
             </button>
           </Link>

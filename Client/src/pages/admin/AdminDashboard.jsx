@@ -100,6 +100,7 @@ const AdminDashboard = () => {
               <option value="Egg">Egg</option>
               <option value="Fish">Fish</option>
               <option value="Addon">Addon</option>
+              <option value="Extra">Extra</option>
             </select>
 
             <input
