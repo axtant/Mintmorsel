@@ -1,0 +1,122 @@
+/* adminDashboard.css */
+
+:root {
+  --clr-bg: #f9fafb;
+  --clr-primary: #10b981;
+  --clr-primary-dark: #059669;
+  --clr-danger: #ef4444;
+  --clr-danger-dark: #dc2626;
+  --clr-border: #d1d5db;
+  --clr-heading: #1f2937;
+  --clr-card-bg: #ffffff;
+  --clr-shadow: rgba(0, 0, 0, 0.05);
+  --font-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-wrapper {
+  font-family: var(--font-base);
+  background-color: var(--clr-bg);
+  min-height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.admin-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--clr-heading);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.admin-card {
+  background-color: var(--clr-card-bg);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--clr-shadow);
+}
+
+.admin-section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--clr-heading);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-input {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--clr-border);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.admin-input:focus {
+  border-color: var(--clr-primary);
+  outline: none;
+}
+
+.admin-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.admin-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 600px) {
+  .admin-actions {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+}
+
+.admin-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.admin-button.success {
+  background-color: var(--clr-primary);
+  color: white;
+}
+
+.admin-button.success:hover {
+  background-color: var(--clr-primary-dark);
+}
+
+.admin-button.danger {
+  background-color: var(--clr-danger);
+  color: white;
+}
+
+.admin-button.danger:hover {
+  background-color: var(--clr-danger-dark);
+}
+
+.admin-button.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

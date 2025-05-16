@@ -1,18 +1,15 @@
-// src/components/AdminDashboard.jsx
 import React, { useState } from 'react';
-import { API_ENDPOINTS } from '../../config/apiConfig';
 import { postMenuItem } from '../../services/menuService';
 import OrderDashboard from './OrderDashboard';
+import '../css/AdminDashboard.css';
 
 const AdminDashboard = () => {
-  // Menu Management States
   const [category, setCategory] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [isPosting, setIsPosting] = useState(false);
 
-  // Menu Form Submission
   const handlePostMenu = async () => {
     if (!category || !name || !price) {
       alert('Please fill all required fields');
@@ -28,7 +25,6 @@ const AdminDashboard = () => {
         price: parseFloat(price),
       });
       alert('Menu item added successfully!');
-      // Clear form after successful post
       setCategory('');
       setName('');
       setDescription('');
@@ -41,83 +37,66 @@ const AdminDashboard = () => {
     }
   };
 
-  // const handleDeleteAll = async () => {
-  //   if (!window.confirm('Are you sure you want to delete all menu items?')) return;
-
-  //   try {
-  //     await deleteAllMenuItems();
-  //     alert('All menu items deleted!');
-  //   } catch (error) {
-  //     console.error('Error deleting menu items:', error);
-  //     alert('Failed to delete menu items.');
-  //   }
-  // };
   return (
-    <div className="admin-dashboard p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
+    <div className="admin-wrapper">
+      <h1 className="admin-title">Admin Dashboard</h1>
 
-      {/* Menu Management Section */}
-      <div className="menu-section bg-white shadow p-4 rounded mb-6">
-        <h2 className="text-xl font-semibold mb-4">Menu Management</h2>
+      <section className="admin-card">
+        <h2 className="admin-section-title">Menu Management</h2>
 
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="border rounded p-2 w-full mb-2"
-        >
-          <option value="">Select Category</option>
-          <option value="Veg">Veg</option>
-          <option value="Chicken">Chicken</option>
-          <option value="Egg">Egg</option>
-          <option value="Fish">Fish</option>
-          <option value="Addon">Addon</option>
-        </select>
-
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Item Name"
-          className="border rounded p-2 w-full mb-2"
-        />
-
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Item Description"
-          className="border rounded p-2 w-full mb-2"
-          rows="3"
-        />
-
-        <input
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          placeholder="Price"
-          className="border rounded p-2 w-full mb-4"
-        />
-
-        <div className="flex gap-2">
-          <button
-            onClick={handlePostMenu}
-            disabled={isPosting}
-            className={`bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 ${isPosting ? 'opacity-50 cursor-not-allowed' : ''}`}
+        <div className="admin-form">
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="admin-input"
           >
-            {isPosting ? 'Posting...' : 'Post Menu Item'}
-          </button>
-        </div>
-        <div>
-          <button
-            // onClick={handleDeleteAll}
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-          >
-            Delete All Menu Items
-          </button>
-        </div>
-      </div>
+            <option value="">Select Category</option>
+            <option value="Veg">Veg</option>
+            <option value="Chicken">Chicken</option>
+            <option value="Egg">Egg</option>
+            <option value="Fish">Fish</option>
+            <option value="Addon">Addon</option>
+          </select>
 
-      {/* Order Dashboard */}
-      { <OrderDashboard/> }
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Item Name"
+            className="admin-input"
+          />
+
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Item Description"
+            rows="3"
+            className="admin-input admin-textarea"
+          />
+
+          <input
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            placeholder="Price"
+            className="admin-input"
+          />
+
+          <div className="admin-actions">
+            <button
+              onClick={handlePostMenu}
+              disabled={isPosting}
+              className={`admin-button success ${isPosting ? 'disabled' : ''}`}
+            >
+              {isPosting ? 'Posting...' : 'Post Menu Item'}
+            </button>
+
+            <button className="admin-button danger">
+              Delete All Menu Items
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
