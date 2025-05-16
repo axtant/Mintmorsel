@@ -17,7 +17,7 @@ const Cart = () => {
         <p className="cart-empty-message">Your cart is empty.</p>
         <div className="text-center">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/Dashboard")}
             className="cart-back-button"
           >
             Back to Menu
