@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { postMenuItem } from '../../services/menuService';
 import OrderDashboard from './OrderDashboard';
-import '../css/AdminDashboard.css';
+import '../css/Admindashboard.css';
 
 const AdminDashboard = () => {
   const [category, setCategory] = useState('');
