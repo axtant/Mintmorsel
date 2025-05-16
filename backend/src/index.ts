@@ -9,7 +9,7 @@ app.use(
   cors({
     origin:['http://localhost:5173', 'https://mintmorsel.vercel.app'],
     credentials: true,
-    allowMethods: ['GET', 'POST', 'OPTIONS'],
+    allowMethods: ['GET', 'POST', 'OPTIONS', 'PUT'],
     allowHeaders: ['Content-Type', 'Authorization'],
   })
 );

@@ -4,7 +4,7 @@ export const fetchMenu = async () => {
   try {
     const response = await fetch(API_ENDPOINTS.MENU, {
       method: 'GET',
-      credentials: 'include', // Include cookies in requests
+      credentials: 'include',
     });
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
     return await response.json();
@@ -24,31 +24,33 @@ export const postMenuItem = async (menuItem) => {
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
   } catch (error) {
     console.error('Error posting menu item:', error);
-    throw error; // Re-throw to propagate error to caller
+    throw error;
   }
 };
 
 export const deleteAllMenuItems = async () => {
   try {
-    const response = await fetch(API_ENDPOINTS.MENU, { method: 'DELETE' });
+    const response = await fetch(`${API_ENDPOINTS.MENU}/delete`, {
+      method: 'DELETE',
+    });
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
   } catch (error) {
     console.error('Error deleting all menu items:', error);
-    throw error; // Re-throw to propagate error to caller
+    throw error;
   }
 };
 
-//Auh version
+export const updateMenuItemDesc = async (newDesc) => {
+  try {
+    const response = await fetch(`${API_ENDPOINTS.MENU}/update-desc`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ itemDesc: newDesc }),
+    });
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+  } catch (error) {
+    console.error('Error updating item description:', error);
+    throw error;
+  }
+};
 
-// export const deleteAllMenuItems = async () => {
-//   try {
-//     const response = await fetch(API_ENDPOINTS.MENU, {
-//       method: 'DELETE',
-//       credentials: 'include', // Include cookies
-//     });
-//     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-//   } catch (error) {
-//     console.error('Error deleting all menu items:', error);
-//     throw error; // Re-throw to propagate error to caller
-//   }
-// };

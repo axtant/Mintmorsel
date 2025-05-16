@@ -67,5 +67,25 @@ menuRouter.delete('/delete', async (c) => {
   }
 })
 
+menuRouter.put('/update-desc', async (c) => {
+  const prisma = createPrismaClient(c.env.DATABASE_URL);
+  const body = await c.req.json();
+
+  const fixedId = '96c88047-4d6c-4bcd-8888-b701e93fb93b';
+
+  try {
+    const updatedMenu = await prisma.menu.update({
+      where: { id: fixedId },
+      data: {
+        itemDesc: body.itemDesc,
+      },
+    });
+
+    return c.json(updatedMenu);
+  } catch (e) {
+    return c.json({ message: e }, 400);
+  }
+});
+
 
 export default menuRouter;
