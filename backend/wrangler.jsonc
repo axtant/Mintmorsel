@@ -5,6 +5,6 @@
   "compatibility_date": "2025-03-28",
   "compatibility_flags": ["nodejs_compat"],
   "vars": {
-    "DATABASE_URL":"prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiZGQwYzU3NmYtNjE4MS00N2ZhLTkxMjYtMjA1YjdlMzA2MzAzIiwidGVuYW50X2lkIjoiYzNjMDQxYzIyNjY0Yzg4MWUyNTQyMTA2YmJmNDBiMGU2YWIwNTljNGRkODNjMTUxZWI5MzdiZGU5M2FiMDc2NiIsImludGVybmFsX3NlY3JldCI6ImM1ZjYzMDU1LTQ5YzYtNGY3Zi1hMDYyLWUwMWQ3YzMxNDNjZSJ9.YKtf0-NdQLExRupPfwFgc50i0Z9Jpurslaf_r4Yg8i4"
+    "DATABASE_URL":"prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMDFKVldHNlc0OUI0VEZOUVZTRkhZSkI4QTMiLCJ0ZW5hbnRfaWQiOiJjM2MwNDFjMjI2NjRjODgxZTI1NDIxMDZiYmY0MGIwZTZhYjA1OWM0ZGQ4M2MxNTFlYjkzN2JkZTkzYWIwNzY2IiwiaW50ZXJuYWxfc2VjcmV0IjoiYzVmNjMwNTUtNDljNi00ZjdmLWEwNjItZTAxZDdjMzE0M2NlIn0.z7Gxnqwej9hybEBXYGVfpUuoCR8kfy4ustuMVc6NaVU"
   }
 }

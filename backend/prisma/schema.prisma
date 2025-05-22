@@ -12,7 +12,7 @@ model User {
   username String? @unique
   password String
   address  String
-  pin      Int
+  pin      BigInt  @db.BigInt
   gMapLink String
 }
 
