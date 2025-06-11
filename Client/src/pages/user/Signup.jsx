@@ -73,14 +73,14 @@ const Signup = () => {
         </div>
         <div className="signup-form-group">
           <input
-            placeholder="Google Maps Link"
+            placeholder="Digi Pin"
             className="signup-maps-link"
             type="text"
             value={gmapLink}
             onChange={(e) => setGmapLink(e.target.value)}
             required
           />
-          <Link to="https://www.google.co.in/maps" className="signup-google-maps">
+          <Link to="https://dac.indiapost.gov.in/mydigipin/home" className="signup-google-maps">
             <i className="fa-solid fa-location-arrow fa-1x"></i>
           </Link>
         </div>
