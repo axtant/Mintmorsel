@@ -1,7 +1,8 @@
 # 🍽️ MintMorsel
 
 A real-time restaurant management web application for menu handling, ordering, and payments. <br>
-<i> <a href="mintmorsel.vercel.app/"> currently live </a> </i>
+<i> <a href="mintmorsel.vercel.app/"> currently dead </a> <br> but.. 
+<a href="https://file.notion.com/f/f/35c1d2e0-5582-4532-beef-fffeb1758cf7/97647838-9fce-4e26-9733-8949bd75587e/MintMorsal_v0.1.pdf?table=block&id=39aba305-8617-803b-b109-d42a3024ca93&spaceId=35c1d2e0-5582-4532-beef-fffeb1758cf7&expirationTimestamp=1783800000000&signature=cDEjLyYLvIo78fTsUXZQAYOksIJomwx_I4fHSIuw-ow&downloadName=MintMorsal+v0.1.pdf"> pptx </i>
 
 ## ✨ Features
 - Menu & stock management
